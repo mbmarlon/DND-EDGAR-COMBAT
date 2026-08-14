@@ -206,6 +206,17 @@ body{
 .ax-toggle .ax-ico{margin-top:1px;color:var(--ax-text-subtle);
   transition:color var(--ax-motion-fast) var(--ax-ease-standard)}
 .ax-toggle[aria-pressed="true"] .ax-ico{color:var(--ax-accent)}
+/* botón de acción dentro de la rejilla de interruptores: mismo tamaño, otro papel */
+.ax-toggle--accion{border-style:dashed;border-color:var(--ax-border-strong)}
+.ax-toggle--accion .ax-ico{color:var(--ax-accent)}
+.ax-toggle--accion:hover{background:var(--ax-fill-active)}
+/* vida por debajo de la mitad: recuerda que puedes curarte */
+.ax-toggle--accion.is-alerta{border-style:solid;border-color:rgba(var(--ax-accent-rgb),.55);
+  animation:ax-latido 1.5s var(--ax-ease-standard) infinite}
+@keyframes ax-latido{
+  0%,100%{box-shadow:0 0 0 0 rgba(var(--ax-accent-rgb),0);background:var(--ax-fill-hover)}
+  50%{box-shadow:0 0 18px -2px rgba(var(--ax-accent-rgb),.55);background:rgba(var(--ax-accent-rgb),.14)}
+}
 
 .ax-note{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--ax-space-3);
   padding:var(--ax-space-3);border-radius:var(--ax-radius-md);
@@ -292,6 +303,29 @@ body{
 .ax-btn-primary.is-used{background:none;color:var(--ax-text-subtle);
   box-shadow:none;border:1px solid var(--ax-border);font-weight:var(--ax-weight-medium)}
 .ax-btn-primary.is-used:hover{filter:none;background:var(--ax-fill-hover);color:var(--ax-text)}
+/* ataque extra: apagado hasta que un crítico o una muerte lo desbloquean */
+.ax-btn-primary:disabled{background:none;border:1px dashed var(--ax-border);
+  color:var(--ax-text-subtle);box-shadow:none;opacity:.55;cursor:not-allowed;
+  font-weight:var(--ax-weight-medium)}
+.ax-btn-primary:disabled:hover{filter:none}
+.ax-btn-primary.is-listo{animation:ax-latido-btn 1.4s var(--ax-ease-standard) infinite}
+.ax-btn-primary.is-nuevo{animation:ax-destello .55s var(--ax-ease-standard) 3}
+@keyframes ax-latido-btn{
+  0%,100%{box-shadow:var(--ax-glow-accent)}
+  50%{box-shadow:0 0 26px 2px rgba(var(--ax-accent-rgb),.85)}
+}
+@keyframes ax-destello{
+  0%,100%{filter:brightness(1);transform:scale(1)}
+  50%{filter:brightness(1.45);transform:scale(1.035)}
+}
+/* mientras el extra ya está disponible, sobra ofrecerlo otra vez */
+[data-extra="si"] .ax-caida{display:none}
+.ax-caida{font:inherit;cursor:pointer;margin-top:var(--ax-space-3);
+  display:inline-flex;align-items:center;gap:6px;padding:8px var(--ax-space-4);
+  border-radius:var(--ax-radius-pill);background:var(--ax-fill-hover);
+  border:1px dashed rgba(var(--ax-accent-rgb),.5);color:var(--ax-accent);
+  font-size:var(--ax-text-2xs);font-weight:var(--ax-weight-semibold)}
+.ax-caida:hover{background:var(--ax-accent-wash)}
 .ax-btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:var(--ax-space-2);
   font:inherit;font-weight:var(--ax-weight-semibold);font-size:var(--ax-text-sm);
   color:var(--ax-text);cursor:pointer;min-height:var(--ax-control-h-lg);
@@ -583,6 +617,10 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
     <button class="ax-toggle" id="swDesv" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-desventaja"/></svg><span><b>Desventaja</b><small>cegado · cobertura</small></span></button>
     <button class="ax-toggle" id="swFisico" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-dado"/></svg><span><b>Dados físicos</b><small>tú tiras, yo sumo</small></span></button>
     <button class="ax-toggle" id="swReplica" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-replica"/></svg><span><b>Anunciar réplica</b><small>antes · d100 &lt; 50</small></span></button>
+    <button class="ax-toggle ax-toggle--accion" id="btnLanzar">
+      <svg class="ax-ico" aria-hidden="true"><use href="#i-magia"/></svg>
+      <span><b>Lanzar</b><small id="btnLanzarTxt">conjuros y usos</small></span>
+    </button>
   </div>
   <div class="ax-note" id="bandaFuria" hidden>
     <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-escudo"/></svg>Resiste todo salvo psíquico</span>
@@ -590,9 +628,6 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
     <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-veto"/></svg>Sin conjuros</span>
     <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-reloj"/></svg>Acaba si no atacas ni te dañan</span>
   </div>
-  <button class="ax-btn-ghost" id="btnLanzar" style="width:100%;margin-top:8px">
-    <svg class="ax-ico" aria-hidden="true"><use href="#i-magia"/></svg><span id="btnLanzarTxt">Lanzar conjuro</span>
-  </button>
 </section>
 
 <section class="ax-section">
@@ -603,8 +638,9 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
 <div class="ax-actions">
   <button class="ax-btn-primary" id="btnAtq1"></button>
   <button class="ax-btn-primary" id="btnAtq2"></button>
+  <button class="ax-btn-primary" id="btnAtqX" disabled></button>
+  <button class="ax-btn-ghost" id="btnFin"><svg class="ax-ico" aria-hidden="true"><use href="#i-refresco"/></svg>Finalizar turno</button>
 </div>
-<button class="ax-btn-ghost" id="btnFin" style="width:100%;margin-top:8px"><svg class="ax-ico" aria-hidden="true"><use href="#i-refresco"/></svg>Finalizar turno</button>
 
 <div class="ax-card ax-verdict" id="veredicto">
   <div class="ax-verdict__empty">Elige arma y pulsa <strong>Ataque 1</strong>.</div>
@@ -944,6 +980,7 @@ const S = {
   fisico:false, replica:false,
   arma:"hacha", pg:PJ.pgMax, turnoNum:1, acciones:[], slots:{},
   abiertos:{},   // descripciones desplegadas, por id
+  extraDisponible:false,   // GWM: crítico o muerte con arma cuerpo a cuerpo
   usos:Object.fromEntries(PJ.recursos.map(r=>[r.id, r.max]))
 };
 const $ = s => document.querySelector(s);
@@ -1095,9 +1132,12 @@ async function resolverAtaque(etiqueta, forzado, idx){
     html += `<div class="ax-dmg">
       <span class="ax-dmg__n">${danoFinal}</span><span class="ax-dmg__t">${arma.tipo}${crit?' · crítico':''}</span>
       <div class="ax-math">${dmg.desglose}</div>${extra}
-      ${crit?`<div class="ax-hint">${ico("estrella","ax-ico--sm")}<span>Crítico: acción adicional para un ataque extra (Maestro en armas pesadas).</span></div>`:''}
+      ${crit && arma.cac?`<div class="ax-hint">${ico("estrella","ax-ico--sm")}<span>Crítico: tienes <strong>ataque extra</strong> como acción adicional (Maestro en armas pesadas).</span></div>`:''}
+      ${!crit && arma.cac?`<button class="ax-caida" data-caida="1">${ico("craneo","ax-ico--sm")}¿Cayó? Desbloquea el ataque extra</button>`:''}
       ${arma.aviso?`<div class="ax-hint ax-hint--warn">${ico("aviso","ax-ico--sm")}<span>${arma.aviso}</span></div>`:''}
     </div>`;
+    // Maestro en armas pesadas: el crítico cuerpo a cuerpo da el ataque extra
+    if(crit && arma.cac) habilitarExtra("crítico");
     S.acciones.push({idx, et:etiqueta, arma:arma.nombre, ico:arma.ico, total, res:crit?"crítico":"impacta", dano:danoFinal, tipo:arma.tipo});
     log(`${etiqueta} ${arma.nombre}: ${total} vs CA · ${danoFinal} ${arma.tipo}${crit?' (CRIT)':''}`);
     return html + `</div>`;
@@ -1154,25 +1194,54 @@ function preguntarTemerario(total){
 }
 function preguntarReplica(){ return hoja("#repPad","rep"); }
 
-function preguntarRepetir(n){
-  $("#redoTit").textContent = `¿Repetir el ataque ${n}?`;
+function preguntarRepetir(etiqueta){
+  $("#redoTit").textContent = `¿Repetir «${etiqueta}»?`;
   return hoja("#redoPad","redo");
 }
 
+/* ── ataque extra de Maestro en armas pesadas ── */
+function habilitarExtra(motivo){
+  if(S.extraDisponible || S.slots[3]) return;   // ya lo tienes o ya lo gastaste
+  S.extraDisponible = true;
+  log(`Ataque extra disponible (${motivo}).`);
+  pintarVeredicto();
+  const b = $("#btnAtqX");
+  b.classList.remove("is-nuevo");
+  void b.offsetWidth;                            // reinicia la animación
+  b.classList.add("is-nuevo");
+  // el móvil vibra si el navegador lo permite; en iOS no existe y se ignora
+  try{ if(navigator.vibrate) navigator.vibrate([70,60,70,60,120]); }catch(e){}
+}
+
+// el DM canta la muerte: se marca desde la propia tarjeta del ataque
+document.addEventListener("click", e=>{
+  if(e.target.closest("[data-caida]")) habilitarExtra("cayó el objetivo");
+});
+
 function pintarVeredicto(){
-  const html = [S.slots[1], S.slots[2]].filter(Boolean).join("");
+  const html = [S.slots[1], S.slots[2], S.slots[3]].filter(Boolean).join("");
   $("#veredicto").innerHTML = html || `<div class="ax-verdict__empty">Turno ${S.turnoNum} · elige arma y pulsa <strong>Ataque 1</strong>.</div>`;
   [1,2].forEach(n=>{
     const b = $("#btnAtq"+n), usado = !!S.slots[n];
     b.classList.toggle("is-used", usado);
     b.innerHTML = ico(usado ? "check" : "espada") + `Ataque ${n}`;
   });
+  const x = $("#btnAtqX"), usadoX = !!S.slots[3], listo = S.extraDisponible && !usadoX;
+  x.disabled = !S.extraDisponible && !usadoX;
+  x.classList.toggle("is-used", usadoX);
+  x.classList.toggle("is-listo", listo);
+  if(!listo) x.classList.remove("is-nuevo");
+  x.innerHTML = ico(usadoX ? "check" : "estrella") + "ATK extra";
+  x.title = listo ? "Acción adicional por crítico o muerte (Maestro en armas pesadas)"
+                  : "Se desbloquea con un crítico o al hacer caer a un enemigo cuerpo a cuerpo";
+  document.body.dataset.extra = (S.extraDisponible || usadoX) ? "si" : "no";
   guardar();
 }
 
 async function atacar(n){
+  const et = n === 3 ? "Ataque extra" : `Ataque ${n}`;
   if(S.slots[n]){
-    const rehacer = await preguntarRepetir(n);
+    const rehacer = await preguntarRepetir(et);
     if(!rehacer) return;
     S.acciones = S.acciones.filter(a=>a.idx !== n);   // descarta el intento anterior
     S.slots[n] = null;
@@ -1180,10 +1249,10 @@ async function atacar(n){
   }
   let forzado = null;
   if(S.fisico){
-    forzado = await pedirDado(`Ataque ${n}`);
+    forzado = await pedirDado(et);
     if(forzado === null){ pintarVeredicto(); return; }
   }
-  S.slots[n] = await resolverAtaque(`Ataque ${n}`, forzado, n);
+  S.slots[n] = await resolverAtaque(et, forzado, n);
   pintarVeredicto();
   $("#veredicto").scrollIntoView({behavior:"smooth", block:"nearest"});
 }
@@ -1230,6 +1299,7 @@ function finalizarTurno(){
   $("#log").prepend(card);
 
   S.acciones = []; S.slots = {}; S.turnoNum++;
+  S.extraDisponible = false;   // la acción adicional se recupera cada turno
   S.temerario = false; S.ventaja = false; S.desventaja = false; S.replica = false;
   ["#swTemerario","#swVent","#swDesv","#swReplica"].forEach(s=>$(s).setAttribute("aria-pressed","false"));
   pintarEstado();
@@ -1311,15 +1381,30 @@ function etiquetaUso(h){
   return `${h.meta} · ${h.fuente}`;
 }
 
+// el botón vive en la rejilla de Postura; parpadea si estás por debajo de media vida
+function pintarLanzar(){
+  const b = $("#btnLanzar");
+  if(!b) return;
+  const tocado = S.pg < PJ.pgMax / 2;
+  b.classList.toggle("is-alerta", tocado);
+  $("#btnLanzarTxt").textContent = tocado && S.usos.segundo > 0 ? "puedes curarte"
+                                : tocado ? "vida por debajo de la mitad"
+                                : "conjuros y usos";
+}
+
 function preguntarLanzar(){
   return new Promise(resolve=>{
     $("#listaLanzar").innerHTML = PJ.hechizos.map(h=>{
       const id = "l-" + h.id;
       const sinUsos = h.recurso && S.usos[h.recurso] <= 0;
+      const porFuria = S.furia && h.tipo === "conjuro";   // en furia no se lanzan conjuros
+      const bloqueado = sinUsos || porFuria;
+      const motivo = porFuria ? "En furia no puedes lanzar conjuros"
+                   : sinUsos ? "Sin usos hasta el descanso" : etiquetaUso(h);
       return `<div class="ax-item">
         <div class="ax-item__row">
-          <button class="ax-item__head" data-lanzar="${h.id}" ${sinUsos?"disabled":""}>
-            ${ico(h.ico)}<span><b>${h.n}</b><small>${sinUsos ? "Sin usos hasta el descanso" : etiquetaUso(h)}</small></span>
+          <button class="ax-item__head" data-lanzar="${h.id}" ${bloqueado?"disabled":""}>
+            ${ico(porFuria ? "veto" : h.ico)}<span><b>${h.n}</b><small>${motivo}</small></span>
           </button>
           ${botonMas(id, h.n)}
         </div>
@@ -1341,6 +1426,7 @@ async function lanzar(){
   const id = await preguntarLanzar();
   if(!id) return;
   const h = hechizo(id);
+  if(S.furia && h.tipo === "conjuro"){ log(`${h.n}: no puedes lanzarlo en furia.`); return; }
   if(h.recurso){
     if(S.usos[h.recurso] <= 0){ log(`${h.n}: sin usos.`); return; }
     S.usos[h.recurso]--; pintarRecursos();
@@ -1464,10 +1550,9 @@ function pintarEstado(){
   $("#bandaFuria").hidden = !S.furia;
   pintarRetrato();
   $("#swReplica").disabled = !armaActual().replica;
-  // en furia no se lanzan conjuros: se bloquea el botón y se dice por qué
-  $("#btnLanzar").disabled = S.furia;
-  $("#btnLanzarTxt").textContent = S.furia ? "En furia no puedes lanzar" : "Lanzar conjuro";
+  // en furia caen los conjuros, no el botón: dentro se bloquean uno a uno
   $("#hechizosEstado").textContent = S.furia ? "Conjuros bloqueados" : "";
+  pintarLanzar();
   pintarArmas();
   guardar();
 }
@@ -1478,6 +1563,7 @@ function pintarPG(){
   $("#tPG").textContent = S.pg;
   $("#pgTxt").textContent = `${S.pg} / ${PJ.pgMax}`;
   $("#pgBar").style.width = Math.min(100, S.pg/PJ.pgMax*100) + "%";
+  pintarLanzar();
   guardar();
 }
 
@@ -1534,6 +1620,7 @@ function guardarYa(){
     s:{
       arma:S.arma, pg:S.pg, turnoNum:S.turnoNum,
       usos:S.usos, acciones:S.acciones, slots:S.slots, abiertos:S.abiertos,
+      extraDisponible:S.extraDisponible,
       ...Object.fromEntries(BANDERAS.map(k=>[k, S[k]]))
     },
     log: $("#log").innerHTML
@@ -1564,6 +1651,7 @@ function restaurar(){
   const s = g.s;
 
   BANDERAS.forEach(k=>{ if(typeof s[k] === "boolean") S[k] = s[k]; });
+  if(typeof s.extraDisponible === "boolean") S.extraDisponible = s.extraDisponible;
   if(PJ.armas.some(a=>a.id === s.arma)) S.arma = s.arma;          // el arma pudo desaparecer
   if(!armaActual().replica) S.replica = false;
   if(Number.isFinite(s.pg)) S.pg = Math.max(0, Math.min(PJ.pgMax*2, s.pg));
@@ -1626,6 +1714,7 @@ toggle("#swVent","ventaja"); toggle("#swDesv","desventaja"); toggle("#swFisico",
 toggle("#swReplica","replica");
 $("#btnAtq1").onclick = ()=>atacar(1);
 $("#btnAtq2").onclick = ()=>atacar(2);
+$("#btnAtqX").onclick = ()=>atacar(3);
 $("#btnFin").onclick    = finalizarTurno;
 $("#btnLanzar").onclick = lanzar;
 $("#limpiar").onclick   = ()=>{ $("#log").innerHTML = ""; guardar(); };
