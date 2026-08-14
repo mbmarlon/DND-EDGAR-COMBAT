@@ -496,6 +496,8 @@ details[open] summary::after{content:"−"}
 .ax-sheet__x{width:100%;margin-top:var(--ax-space-2);font:inherit;background:transparent;
   border:1px solid var(--ax-border);color:var(--ax-text-subtle);padding:12px;
   border-radius:var(--ax-radius-md);cursor:pointer;font-size:var(--ax-text-sm)}
+.ax-sheet__x[hidden]{display:none}
+#dadoAuto{color:var(--ax-text);border-color:var(--ax-border-strong)}
 .ax-sheet__foot{margin-top:var(--ax-space-4);font-size:var(--ax-text-2xs);
   color:var(--ax-warning-500);line-height:1.55}
 
@@ -697,6 +699,7 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
     <h3 id="dadoTit">Ataque</h3>
     <p id="dadoHint">Pulsa el resultado de tu d20.</p>
     <div class="ax-dice" id="dadoGrid"></div>
+    <button class="ax-sheet__x" id="dadoAuto" data-cara="auto" hidden><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-dado"/></svg> Tíralo por mí</button>
     <button class="ax-sheet__x" data-cara="x"><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-equis"/></svg> Cancelar</button>
   </div>
 </div>
@@ -1151,7 +1154,8 @@ async function resolverAtaque(etiqueta, forzado, idx){
 /* ═══════════════════════════════════════════
    4. DIÁLOGOS
    ═══════════════════════════════════════════ */
-function padDados(caras, titulo, hint){
+// auto:true añade el botón de "tíralo por mí", para cuando no tienes el dado a mano
+function padDados(caras, titulo, hint, auto){
   return new Promise(resolve=>{
     const g = $("#dadoGrid");
     g.style.gridTemplateColumns = `repeat(${caras<=6?3:caras<=12?4:5},1fr)`;
@@ -1159,11 +1163,13 @@ function padDados(caras, titulo, hint){
     g.innerHTML = Array.from({length:caras},(_,i)=>`<button data-cara="${i+1}">${i+1}</button>`).join("");
     $("#dadoTit").textContent = titulo;
     $("#dadoHint").textContent = hint;
+    $("#dadoAuto").hidden = !auto;
     const pad = $("#dadoPad"); pad.hidden = false;
     pad.onclick = e=>{
       const b = e.target.closest("[data-cara]"); if(!b) return;
       pad.hidden = true; pad.onclick = null;
-      resolve(b.dataset.cara === "x" ? null : +b.dataset.cara);
+      const cara = b.dataset.cara;
+      resolve(cara === "x" ? null : cara === "auto" ? d(caras) : +cara);
     };
   });
 }
@@ -1422,25 +1428,39 @@ function preguntarLanzar(){
   });
 }
 
+// pregunta cada dado de curación; devuelve null si cancelas, y entonces no se gasta nada
+async function tirarCura(h){
+  const [n, caras] = h.cura.dados;
+  const dados = [];
+  for(let i=0;i<n;i++){
+    const v = await padDados(caras, h.n,
+      n > 1 ? `Tira tu d${caras} y pulsa el resultado (dado ${i+1} de ${n}).`
+            : `Tira tu d${caras} y pulsa el resultado. Se sumará a tu vida.`, true);
+    if(v === null) return null;
+    dados.push(v);
+  }
+  const suma = dados.reduce((a,b)=>a+b, 0);
+  return {total: suma + h.cura.mas, texto: `${n}d${caras} [${dados.join("+")}] +${h.cura.mas}`};
+}
+
 async function lanzar(){
   const id = await preguntarLanzar();
   if(!id) return;
   const h = hechizo(id);
   if(S.furia && h.tipo === "conjuro"){ log(`${h.n}: no puedes lanzarlo en furia.`); return; }
-  if(h.recurso){
-    if(S.usos[h.recurso] <= 0){ log(`${h.n}: sin usos.`); return; }
-    S.usos[h.recurso]--; pintarRecursos();
-  }
-  if(h.cura){
-    const [n, caras] = h.cura.dados;
-    let suma = 0;
-    for(let i=0;i<n;i++) suma += d(caras);
-    const total = suma + h.cura.mas;
+  if(h.recurso && S.usos[h.recurso] <= 0){ log(`${h.n}: sin usos.`); return; }
+
+  // la tirada va antes de gastar el uso: si cancelas el dado, no pierdes nada
+  const cura = h.cura ? await tirarCura(h) : null;
+  if(h.cura && cura === null){ log(`${h.n}: cancelado, no gastas el uso.`); return; }
+  if(h.recurso){ S.usos[h.recurso]--; pintarRecursos(); }
+
+  if(cura){
     const antes = S.pg;
-    S.pg = Math.min(PJ.pgMax, S.pg + total);      // curarse no pasa del máximo
+    S.pg = Math.min(PJ.pgMax, S.pg + cura.total);      // curarse no pasa del máximo
     pintarPG();
     const real = S.pg - antes;
-    log(`${h.n}: ${n}d${caras} [${suma}] +${h.cura.mas} = ${total} PG` + (real < total ? ` (curas ${real}, tope)` : ""));
+    log(`${h.n}: ${cura.texto} = ${cura.total} PG` + (real < cura.total ? ` (curas ${real}, tope)` : ""));
   } else if(h.tirada){
     const b = bono(h.tirada), r = d(20);
     log(`${h.n}: d20 [${r}] ${b>=0?"+":""}${b} = ${r + b}`);
