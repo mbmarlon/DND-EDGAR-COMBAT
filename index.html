@@ -245,6 +245,8 @@ body{
   cursor:pointer;background:transparent;border:0;color:var(--ax-text);
   padding:var(--ax-space-3) var(--ax-space-3) var(--ax-space-3) var(--ax-space-4)}
 .ax-item__head>span{flex:1 1 auto;min-width:0}
+.ax-item__head:disabled{opacity:.4;cursor:not-allowed}
+.ax-item__row .ax-item__head{flex:1 1 auto;width:auto;min-width:0}
 .ax-item__head b{display:block;font-size:var(--ax-text-sm);
   font-weight:var(--ax-weight-semibold);color:var(--ax-text-strong)}
 .ax-item__head small{display:block;font-size:var(--ax-text-2xs);color:var(--ax-text-subtle);margin-top:1px}
@@ -297,6 +299,8 @@ body{
   background:var(--ax-fill-hover);border:1px solid var(--ax-border);
   transition:background var(--ax-motion-fast) var(--ax-ease-standard)}
 .ax-btn-ghost:hover{background:var(--ax-fill-active);color:var(--ax-text-strong)}
+.ax-btn-ghost:disabled{opacity:.45;cursor:not-allowed;color:var(--ax-text-subtle)}
+.ax-btn-ghost:disabled:hover{background:var(--ax-fill-hover);color:var(--ax-text-subtle)}
 .ax-btn-link{display:inline-flex;align-items:center;gap:5px;font:inherit;background:none;border:0;
   cursor:pointer;font-size:var(--ax-text-xs);font-weight:var(--ax-weight-semibold);color:var(--ax-accent)}
 .ax-btn-link .ax-ico{width:15px;height:15px}
@@ -378,6 +382,9 @@ details[open] summary::after{content:"−"}
   font-variant-numeric:tabular-nums}
 .ax-row button .ax-ico{color:var(--ax-text-subtle)}
 .ax-row>span{min-width:0}
+/* punto de acento = competente en esa salvación o habilidad */
+.ax-row.is-prof>span::before{content:"";display:inline-block;width:5px;height:5px;
+  border-radius:50%;background:var(--ax-accent);margin-inline-end:7px;vertical-align:middle}
 
 /* ══ registro + tarjeta de turno ══ */
 .ax-log{max-height:280px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
@@ -417,7 +424,7 @@ details[open] summary::after{content:"−"}
   background:rgba(6,8,12,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
   display:flex;flex-direction:column;justify-content:flex-end;padding:var(--ax-space-4)}
 .ax-overlay[hidden]{display:none}
-.ax-sheet{max-width:568px;margin:0 auto;width:100%;
+.ax-sheet{max-width:568px;margin:0 auto;width:100%;max-height:84vh;overflow-y:auto;
   background:var(--ax-surface-overlay);border:1px solid var(--ax-border-strong);
   border-radius:var(--ax-radius-xl);box-shadow:var(--ax-shadow-lg);padding:var(--ax-space-5);
   -webkit-backdrop-filter:blur(18px) saturate(1.1);backdrop-filter:blur(18px) saturate(1.1)}
@@ -517,6 +524,7 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
   <symbol id="i-mochila" viewBox="0 0 24 24"><path d="M6.5 10a5.5 5.5 0 0 1 11 0v8.8a1.7 1.7 0 0 1-1.7 1.7H8.2a1.7 1.7 0 0 1-1.7-1.7z"/><path d="M9.5 9.2V6.6a2.5 2.5 0 0 1 5 0v2.6"/><path d="M9.3 14.2h5.4"/></symbol>
   <symbol id="i-dialogo" viewBox="0 0 24 24"><path d="M20.5 11.8c0 3.8-3.8 6.9-8.5 6.9-.9 0-1.8-.1-2.6-.3l-5.4 2 1.8-4.2c-1.4-1.2-2.3-2.8-2.3-4.4 0-3.8 3.8-6.9 8.5-6.9s8.5 3.1 8.5 6.9z"/></symbol>
   <symbol id="i-magia" viewBox="0 0 24 24"><path d="M4.5 19.5 15 9"/><path d="M13.6 7.6 16.4 10.4"/><path d="m18.6 3 .8 2.4 2.4.8-2.4.8-.8 2.4-.8-2.4-2.4-.8 2.4-.8z"/></symbol>
+  <symbol id="i-huella" viewBox="0 0 24 24" fill="currentColor" stroke="none"><ellipse cx="7.4" cy="9.2" rx="1.9" ry="2.4"/><ellipse cx="12" cy="7.4" rx="2" ry="2.6"/><ellipse cx="16.6" cy="9.2" rx="1.9" ry="2.4"/><path d="M12 11.8c2.9 0 5.2 2.2 5.2 4.8 0 1.9-1.4 3.2-3.2 3.2-.8 0-1.4-.2-2-.2s-1.2.2-2 .2c-1.8 0-3.2-1.3-3.2-3.2 0-2.6 2.3-4.8 5.2-4.8z"/></symbol>
 </svg>
 <div class="ax-ambient" aria-hidden="true"><i></i></div>
 <div class="ax-shell">
@@ -545,6 +553,25 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
 
 <section class="ax-section">
   <div class="ax-section__head">
+    <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-corazon"/></svg>Vida</span>
+    <span class="ax-eyebrow ax-num" id="pgTxt">110 / 110</span>
+  </div>
+  <div class="ax-card">
+    <div class="ax-hp">
+      <button data-d="-10">−10</button>
+      <button data-d="-5">−5</button>
+      <button data-d="-1">−1</button>
+      <input id="pgIn" type="number" inputmode="numeric" value="110">
+      <button data-d="1">+1</button>
+      <button data-d="5">+5</button>
+      <button data-d="10">+10</button>
+    </div>
+    <div class="ax-track"><i id="pgBar" style="width:100%"></i></div>
+  </div>
+</section>
+
+<section class="ax-section">
+  <div class="ax-section__head">
     <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-espadas"/></svg>Postura</span>
     <span class="ax-eyebrow" id="estado">En calma</span>
   </div>
@@ -563,6 +590,9 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
     <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-veto"/></svg>Sin conjuros</span>
     <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-reloj"/></svg>Acaba si no atacas ni te dañan</span>
   </div>
+  <button class="ax-btn-ghost" id="btnLanzar" style="width:100%;margin-top:8px">
+    <svg class="ax-ico" aria-hidden="true"><use href="#i-magia"/></svg><span id="btnLanzarTxt">Lanzar conjuro</span>
+  </button>
 </section>
 
 <section class="ax-section">
@@ -582,29 +612,18 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
 
 <section class="ax-section">
   <div class="ax-section__head">
-    <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-capas"/></svg>Reservas</span>
-    <button class="ax-btn-link" id="descansoLargo"><svg class="ax-ico" aria-hidden="true"><use href="#i-luna"/></svg>Descanso largo</button>
+    <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-magia"/></svg>Hechizos y usos</span>
+    <span class="ax-eyebrow" id="hechizosEstado"></span>
   </div>
-  <div class="ax-card" id="recursos"></div>
+  <div class="ax-weapons" id="hechizos"></div>
 </section>
 
 <section class="ax-section">
   <div class="ax-section__head">
-    <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-corazon"/></svg>Vida</span>
-    <span class="ax-eyebrow ax-num" id="pgTxt">110 / 110</span>
+    <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-capas"/></svg>Reservas</span>
+    <button class="ax-btn-link" id="descansoLargo"><svg class="ax-ico" aria-hidden="true"><use href="#i-luna"/></svg>Descanso largo</button>
   </div>
-  <div class="ax-card">
-    <div class="ax-hp">
-      <button data-d="-10">−10</button>
-      <button data-d="-5">−5</button>
-      <button data-d="-1">−1</button>
-      <input id="pgIn" type="number" inputmode="numeric" value="110">
-      <button data-d="1">+1</button>
-      <button data-d="5">+5</button>
-      <button data-d="10">+10</button>
-    </div>
-    <div class="ax-track"><i id="pgBar" style="width:100%"></i></div>
-  </div>
+  <div class="ax-card" id="recursos"></div>
 </section>
 
 <section class="ax-section">
@@ -680,6 +699,15 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
   </div>
 </div>
 
+<div class="ax-overlay" id="lanzarPad" hidden>
+  <div class="ax-sheet">
+    <h3>¿Qué quieres lanzar?</h3>
+    <p>Pulsa el nombre para usarlo. La flecha abre la descripción.</p>
+    <div class="ax-weapons" id="listaLanzar" style="margin-top:16px"></div>
+    <button class="ax-sheet__x" data-lanzar="x"><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-equis"/></svg> Cancelar</button>
+  </div>
+</div>
+
 <div class="ax-overlay" id="resetPad" hidden>
   <div class="ax-sheet">
     <h3>¿Empezar de cero?</h3>
@@ -720,23 +748,36 @@ const PJ = {
   replicaModo: "x2",
   // salvaciones con ventaja: resaltan en la cabecera. El texto es el porqué.
   ventajaSalva: {FUE:"En furia", DES:"Sentido del peligro", CON:"Ventaja"},
+  // El bono se calcula solo: modificador del atributo + competencia si comp:true.
+  // Al subir de nivel basta con tocar mods y comp arriba.
   salvas: [
-    {n:"Fuerza", b:9, nota:"Ventaja en furia"},
-    {n:"Destreza", b:2, nota:"Ventaja · sentido del peligro"},
-    {n:"Constitución", b:7, nota:"Ventaja"},
-    {n:"Inteligencia", b:1, nota:""},
-    {n:"Sabiduría", b:1, nota:""},
-    {n:"Carisma", b:1, nota:""}
+    {n:"Fuerza", atr:"FUE", comp:true, nota:"Ventaja en furia"},
+    {n:"Destreza", atr:"DES", nota:"Ventaja · sentido del peligro"},
+    {n:"Constitución", atr:"CON", comp:true, nota:"Ventaja"},
+    {n:"Inteligencia", atr:"INT"},
+    {n:"Sabiduría", atr:"SAB"},
+    {n:"Carisma", atr:"CAR"}
   ],
   habs: [
-    {n:"Atletismo", b:9, nota:"Ventaja en furia"},
-    {n:"Medicina", b:5, nota:""},
-    {n:"Religión", b:5, nota:""},
-    {n:"Trato con animales", b:5, nota:""},
-    {n:"Iniciativa", b:2, nota:"Ventaja siempre"},
-    {n:"Intimidar / Persuasión", b:1, nota:"Presencia imponente"},
-    {n:"Percepción", b:1, nota:"Pasiva 11"},
-    {n:"Sigilo / Acrobacias", b:2, nota:""}
+    {n:"Iniciativa", atr:"DES", nota:"Ventaja siempre"},
+    {n:"Acrobacias", atr:"DES"},
+    {n:"Arcanos", atr:"INT"},
+    {n:"Atletismo", atr:"FUE", comp:true, nota:"Ventaja en furia"},
+    {n:"Engaño", atr:"CAR"},
+    {n:"Historia", atr:"INT"},
+    {n:"Interpretación", atr:"CAR"},
+    {n:"Intimidación", atr:"CAR", nota:"Presencia imponente"},
+    {n:"Investigación", atr:"INT"},
+    {n:"Juego de manos", atr:"DES"},
+    {n:"Medicina", atr:"SAB", comp:true},
+    {n:"Naturaleza", atr:"INT"},
+    {n:"Percepción", atr:"SAB", nota:"Pasiva 11"},
+    {n:"Perspicacia", atr:"SAB"},
+    {n:"Persuasión", atr:"CAR"},
+    {n:"Religión", atr:"INT", comp:true},
+    {n:"Sigilo", atr:"DES"},
+    {n:"Supervivencia", atr:"SAB"},
+    {n:"Trato con animales", atr:"SAB", comp:true}
   ],
   armas: [
     {id:"hacha", nombre:"Hacha de Golpe", ico:"hacha", dados:[1,12], tipo:"cortante",
@@ -760,39 +801,7 @@ const PJ = {
        hacerlo mientras estés en furia.</em></p>
        <p><em>⚠ Pendiente del DM: usos por día de los conjuros, CD de salvación del objeto y si
        cuenta como arma pesada para GWM (ahora la app asume que sí).</em></p>`,
-     conjuros:[
-       {n:"Animar a los muertos", ico:"craneo", meta:"Nigromancia · nivel 3",
-        d:`<span class="ax-item__meta">Lanzamiento 1 minuto · Alcance 10 pies · Duración instantánea</span>
-          <p>Crea un sirviente no-muerto. Elige un montón de huesos o el cadáver de un humanoide
-          Mediano o Pequeño dentro del alcance: el conjuro lo llena de una burda imitación de vida y
-          lo alza como <strong>esqueleto</strong> (si elegiste huesos) o <strong>zombi</strong>
-          (si elegiste el cadáver). El DM tiene sus estadísticas.</p>
-          <p>En cada uno de tus turnos puedes usar una <strong>acción adicional</strong> para
-          ordenarle mentalmente qué hacer, siempre que esté a 60 pies o menos de ti; si controlas
-          varios, puedes darles la misma orden a todos a la vez. Decides qué acción toma y adónde se
-          mueve en su siguiente turno, o le das una orden general, como vigilar una sala o un pasillo.
-          Si no le das ninguna orden, solo se defiende de las criaturas hostiles. Una vez recibida una
-          orden, la sigue hasta completarla.</p>
-          <p>La criatura te obedece durante <strong>24 horas</strong>. Para mantener el control otras
-          24 debes volver a lanzarle el conjuro antes de que acabe el plazo; ese uso reafirma el
-          control sobre hasta cuatro criaturas que ya hayas animado, en vez de crear una nueva.</p>
-          <p><strong>A niveles superiores.</strong> Con un espacio de nivel 4 o más, animas o reafirmas
-          el control sobre dos criaturas más por cada nivel por encima del 3. Cada una debe venir de un
-          cadáver o montón de huesos distinto.</p>`},
-       {n:"Hablar con los muertos", ico:"dialogo", meta:"Nigromancia · nivel 3",
-        d:`<span class="ax-item__meta">Lanzamiento 1 acción · Alcance 10 pies · Duración 10 minutos</span>
-          <p>Concedes apariencia de vida e inteligencia a un cadáver dentro del alcance para que
-          responda a las preguntas que le hagas. El cadáver debe <strong>conservar la boca</strong> y
-          no puede ser un no-muerto. El conjuro falla si ese cadáver ya fue objetivo de este conjuro
-          en los últimos 10 días.</p>
-          <p>Hasta que el conjuro acabe puedes hacerle <strong>hasta cinco preguntas</strong>. El
-          cadáver solo sabe lo que sabía en vida, incluidos los idiomas que hablaba. Las respuestas
-          suelen ser breves, crípticas o repetitivas, y no está obligado a decir la verdad si le eres
-          hostil o te reconoce como enemigo.</p>
-          <p>El conjuro <strong>no devuelve el alma al cuerpo</strong>, solo su espíritu animador: el
-          cadáver no puede aprender nada nuevo, no comprende lo que ha pasado desde que murió ni puede
-          especular sobre el futuro.</p>`}
-     ]},
+     conjuros:["animar","hablarMuertos"]},
     {id:"replica", nombre:"Hacha réplica", ico:"replica", dados:[1,12], tipo:"cortante",
      cac:true, fue:true, pesada:true, magico:0, replica:true,
      aviso:"Homebrew: dados asumidos 1d12. Ajusta si tu DM usa otros.",
@@ -816,6 +825,68 @@ const PJ = {
        <p><strong>La furia no suma su daño.</strong> El bonificador de furia solo se aplica a ataques
        cuerpo a cuerpo con Fuerza, y esto es un ataque a distancia aunque uses Fuerza para tirarlo.</p>
        <p>Tampoco admite Maestro en Armas Pesadas, porque la jabalina no es pesada.</p>`}
+  ],
+  // Todo lo que puedes activar: los conjuros del arma, el ritual del tótem,
+  // el rasgo de guerrero y la habilidad con animales.
+  hechizos: [
+    {id:"animar", n:"Animar a los muertos", ico:"craneo", tipo:"conjuro",
+     meta:"Nigromancia · nivel 3", fuente:"Brazo de la Muerte",
+        d:`<span class="ax-item__meta">Lanzamiento 1 minuto · Alcance 10 pies · Duración instantánea</span>
+          <p>Crea un sirviente no-muerto. Elige un montón de huesos o el cadáver de un humanoide
+          Mediano o Pequeño dentro del alcance: el conjuro lo llena de una burda imitación de vida y
+          lo alza como <strong>esqueleto</strong> (si elegiste huesos) o <strong>zombi</strong>
+          (si elegiste el cadáver). El DM tiene sus estadísticas.</p>
+          <p>En cada uno de tus turnos puedes usar una <strong>acción adicional</strong> para
+          ordenarle mentalmente qué hacer, siempre que esté a 60 pies o menos de ti; si controlas
+          varios, puedes darles la misma orden a todos a la vez. Decides qué acción toma y adónde se
+          mueve en su siguiente turno, o le das una orden general, como vigilar una sala o un pasillo.
+          Si no le das ninguna orden, solo se defiende de las criaturas hostiles. Una vez recibida una
+          orden, la sigue hasta completarla.</p>
+          <p>La criatura te obedece durante <strong>24 horas</strong>. Para mantener el control otras
+          24 debes volver a lanzarle el conjuro antes de que acabe el plazo; ese uso reafirma el
+          control sobre hasta cuatro criaturas que ya hayas animado, en vez de crear una nueva.</p>
+          <p><strong>A niveles superiores.</strong> Con un espacio de nivel 4 o más, animas o reafirmas
+          el control sobre dos criaturas más por cada nivel por encima del 3. Cada una debe venir de un
+          cadáver o montón de huesos distinto.</p>`},
+    {id:"hablarMuertos", n:"Hablar con los muertos", ico:"dialogo", tipo:"conjuro",
+     meta:"Nigromancia · nivel 3", fuente:"Brazo de la Muerte",
+        d:`<span class="ax-item__meta">Lanzamiento 1 acción · Alcance 10 pies · Duración 10 minutos</span>
+          <p>Concedes apariencia de vida e inteligencia a un cadáver dentro del alcance para que
+          responda a las preguntas que le hagas. El cadáver debe <strong>conservar la boca</strong> y
+          no puede ser un no-muerto. El conjuro falla si ese cadáver ya fue objetivo de este conjuro
+          en los últimos 10 días.</p>
+          <p>Hasta que el conjuro acabe puedes hacerle <strong>hasta cinco preguntas</strong>. El
+          cadáver solo sabe lo que sabía en vida, incluidos los idiomas que hablaba. Las respuestas
+          suelen ser breves, crípticas o repetitivas, y no está obligado a decir la verdad si le eres
+          hostil o te reconoce como enemigo.</p>
+          <p>El conjuro <strong>no devuelve el alma al cuerpo</strong>, solo su espíritu animador: el
+          cadáver no puede aprender nada nuevo, no comprende lo que ha pasado desde que murió ni puede
+          especular sobre el futuro.</p>`},
+    {id:"hablarAnimales", n:"Hablar con los animales", ico:"huella", tipo:"conjuro",
+     meta:"Adivinación · nivel 1 · solo ritual", fuente:"Buscador de espíritus",
+     d:`<span class="ax-item__meta">Lanzamiento 10 minutos (ritual) · Alcance personal · Duración 10 minutos</span>
+       <p>Durante la duración puedes <strong>comprender a las bestias y hablar con ellas</strong>.
+       Lo que saben y perciben está limitado por su inteligencia, pero como mínimo pueden darte
+       información sobre lugares y monstruos cercanos, incluido lo que hayan percibido en el último día.</p>
+       <p>Podrías convencer a una bestia de hacerte un <strong>pequeño favor</strong>, a criterio del DM.</p>
+       <p><strong>Solo como ritual.</strong> El tótem te deja lanzarlo sin gastar espacio de conjuro,
+       pero siempre como ritual: tarda 10 minutos, así que no sirve en mitad de un combate.</p>`},
+    {id:"trato", n:"Trato con animales", ico:"dado", tipo:"habilidad",
+     meta:"Habilidad de Sabiduría", fuente:"Competente",
+     tirada:{atr:"SAB", comp:true},
+     d:`<p>Prueba de <strong>Sabiduría (Trato con animales)</strong>. El DM te la pide cuando hay duda
+       sobre si consigues calmar a un animal doméstico, evitar que una montura se asuste o intuir las
+       intenciones de un animal.</p>
+       <p>También se usa para controlar a tu montura cuando le pides una maniobra arriesgada.</p>
+       <p><strong>No es un conjuro:</strong> puedes hacerla en furia. Al pulsarla aquí se tira sola.</p>`},
+    {id:"aliento2", n:"Tomar aliento", ico:"corazon-mas", tipo:"rasgo",
+     meta:"Rasgo de guerrero · acción adicional", fuente:"Guerrero 1",
+     recurso:"segundo", cura:{dados:[1,10], mas:1},
+     d:`<p>Con una <strong>acción adicional</strong> recuperas <strong>1d10 + tu nivel de guerrero</strong>
+       (1) puntos de golpe.</p>
+       <p>Un uso, y lo recuperas al terminar un <strong>descanso corto o largo</strong>.</p>
+       <p><strong>No es un conjuro:</strong> puedes usarlo en furia. Al pulsarlo aquí se gasta el
+       marcador de Reservas y los PG suben solos.</p>`}
   ],
   // Rasgos con descripción. Los de la clase y la raza vienen del SRD 5.1;
   // los de estilo de combate y opcionales están resumidos con mis palabras.
@@ -1173,7 +1244,10 @@ function botonMas(id, etiqueta){
 function cuerpoDesc(id, html){
   return `<div class="ax-item__body" id="d-${id}" ${S.abiertos[id] ? "" : "hidden"}>${html}</div>`;
 }
-function fichaConjuro(c){
+const hechizo = id => PJ.hechizos.find(h=>h.id === id);
+function fichaConjuro(id){
+  const c = hechizo(id);
+  if(!c) return "";
   return `<div class="ax-spell">
     <div class="ax-spell__h">${ico(c.ico)}<b>${c.n}</b><span>${c.meta}</span></div>
     ${c.d}</div>`;
@@ -1215,6 +1289,80 @@ function pintarArmas(){
   });
 }
 
+function pintarHechizos(){
+  $("#hechizos").innerHTML = PJ.hechizos.map(h=>{
+    const id = "h-" + h.id;
+    return `<div class="ax-item">
+      <button class="ax-item__head" data-desc="${id}" aria-expanded="${!!S.abiertos[id]}" aria-controls="d-${id}">
+        ${ico(h.ico)}<span><b>${h.n}</b><small>${h.meta} · ${h.fuente}</small></span>${ico("chevron","ax-ico--chev")}
+      </button>
+      ${cuerpoDesc(id, h.d)}
+    </div>`;
+  }).join("");
+}
+
+/* ── lanzar: elegir qué usar, con su descripción a mano ── */
+function etiquetaUso(h){
+  if(h.recurso){
+    const q = S.usos[h.recurso];
+    return `${h.meta} · queda${q===1?"":"n"} ${q}`;
+  }
+  if(h.tirada){ const b = bono(h.tirada); return `${h.meta} · ${b>=0?"+":""}${b}`; }
+  return `${h.meta} · ${h.fuente}`;
+}
+
+function preguntarLanzar(){
+  return new Promise(resolve=>{
+    $("#listaLanzar").innerHTML = PJ.hechizos.map(h=>{
+      const id = "l-" + h.id;
+      const sinUsos = h.recurso && S.usos[h.recurso] <= 0;
+      return `<div class="ax-item">
+        <div class="ax-item__row">
+          <button class="ax-item__head" data-lanzar="${h.id}" ${sinUsos?"disabled":""}>
+            ${ico(h.ico)}<span><b>${h.n}</b><small>${sinUsos ? "Sin usos hasta el descanso" : etiquetaUso(h)}</small></span>
+          </button>
+          ${botonMas(id, h.n)}
+        </div>
+        ${cuerpoDesc(id, h.d)}
+      </div>`;
+    }).join("");
+    const pad = $("#lanzarPad"); pad.hidden = false;
+    pad.onclick = e=>{
+      if(e.target.closest("[data-desc]")) return;   // la flecha solo despliega, no elige
+      const b = e.target.closest("[data-lanzar]");
+      if(!b) return;
+      pad.hidden = true; pad.onclick = null;
+      resolve(b.dataset.lanzar === "x" ? null : b.dataset.lanzar);
+    };
+  });
+}
+
+async function lanzar(){
+  const id = await preguntarLanzar();
+  if(!id) return;
+  const h = hechizo(id);
+  if(h.recurso){
+    if(S.usos[h.recurso] <= 0){ log(`${h.n}: sin usos.`); return; }
+    S.usos[h.recurso]--; pintarRecursos();
+  }
+  if(h.cura){
+    const [n, caras] = h.cura.dados;
+    let suma = 0;
+    for(let i=0;i<n;i++) suma += d(caras);
+    const total = suma + h.cura.mas;
+    const antes = S.pg;
+    S.pg = Math.min(PJ.pgMax, S.pg + total);      // curarse no pasa del máximo
+    pintarPG();
+    const real = S.pg - antes;
+    log(`${h.n}: ${n}d${caras} [${suma}] +${h.cura.mas} = ${total} PG` + (real < total ? ` (curas ${real}, tope)` : ""));
+  } else if(h.tirada){
+    const b = bono(h.tirada), r = d(20);
+    log(`${h.n}: d20 [${r}] ${b>=0?"+":""}${b} = ${r + b}`);
+  } else {
+    log(`Lanzas ${h.n} · ${h.fuente}.`);
+  }
+}
+
 function pintarRasgos(){
   $("#rasgos").innerHTML = PJ.rasgos.map(r=>{
     const id = "r-" + r.id;
@@ -1248,6 +1396,8 @@ function pintarRecursos(){
 
 const ATRIBUTOS = {FUE:"Fuerza", DES:"Destreza", CON:"Constitución",
                    INT:"Inteligencia", SAB:"Sabiduría", CAR:"Carisma"};
+// bono de una salvación, habilidad o prueba: atributo + competencia si toca
+const bono = x => PJ.mods[x.atr] + (x.comp ? PJ.comp : 0);
 
 function pintarAtributos(){
   $("#atributos").innerHTML = Object.keys(ATRIBUTOS).map(k=>{
@@ -1259,8 +1409,11 @@ function pintarAtributos(){
 }
 
 function pintarListas(){
-  const fila = x => `<div class="ax-row"><span>${x.n}${x.nota?`<em>${x.nota}</em>`:''}</span>
-    <button data-b="${x.b}" data-n="${x.n}">${ico("dado","ax-ico--sm")}+${x.b}</button></div>`;
+  const fila = x => {
+    const b = bono(x), signo = b >= 0 ? "+" : "";
+    return `<div class="ax-row${x.comp?" is-prof":""}"><span>${x.n}${x.nota?`<em>${x.nota}</em>`:''}</span>
+      <button data-b="${b}" data-n="${x.n}">${ico("dado","ax-ico--sm")}${signo}${b}</button></div>`;
+  };
   $("#salvas").innerHTML = PJ.salvas.map(fila).join("");
   $("#habs").innerHTML = PJ.habs.map(fila).join("");
   document.querySelectorAll(".ax-row button").forEach(b=>{
@@ -1311,6 +1464,10 @@ function pintarEstado(){
   $("#bandaFuria").hidden = !S.furia;
   pintarRetrato();
   $("#swReplica").disabled = !armaActual().replica;
+  // en furia no se lanzan conjuros: se bloquea el botón y se dice por qué
+  $("#btnLanzar").disabled = S.furia;
+  $("#btnLanzarTxt").textContent = S.furia ? "En furia no puedes lanzar" : "Lanzar conjuro";
+  $("#hechizosEstado").textContent = S.furia ? "Conjuros bloqueados" : "";
   pintarArmas();
   guardar();
 }
@@ -1470,6 +1627,7 @@ toggle("#swReplica","replica");
 $("#btnAtq1").onclick = ()=>atacar(1);
 $("#btnAtq2").onclick = ()=>atacar(2);
 $("#btnFin").onclick    = finalizarTurno;
+$("#btnLanzar").onclick = lanzar;
 $("#limpiar").onclick   = ()=>{ $("#log").innerHTML = ""; guardar(); };
 $("#borrarGuardado").onclick = async ()=>{ if(await hoja("#resetPad","reset")) borrarGuardado(); };
 $("#descansoLargo").onclick = ()=>{
@@ -1485,7 +1643,7 @@ $("#pgIn").onchange = e => { S.pg = +e.target.value || 0; pintarPG(); };
 $("#tCA").textContent = PJ.ca;
 restaurar();                  // lee el guardado antes del primer pintado
 sincronizarInterruptores();
-pintarAtributos(); pintarRecursos(); pintarListas(); pintarRasgos();
+pintarAtributos(); pintarRecursos(); pintarListas(); pintarRasgos(); pintarHechizos();
 pintarPG(); pintarEstado(); pintarVeredicto();
 </script>
 </body>
