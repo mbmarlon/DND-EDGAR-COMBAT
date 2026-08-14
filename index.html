@@ -217,18 +217,61 @@ body{
   font-size:var(--ax-text-2xs);line-height:1.3}
 .ax-note .ax-ico{color:var(--ax-accent)}
 
-/* ══ armas ══ */
+/* ══ inventario ══ */
 .ax-weapons{display:flex;flex-direction:column;gap:var(--ax-space-2)}
-.ax-weapon{font:inherit;width:100%;text-align:start;cursor:pointer;
-  display:flex;justify-content:space-between;align-items:center;gap:var(--ax-space-3);
-  padding:var(--ax-space-3) var(--ax-space-4);color:var(--ax-text);
-  background:var(--ax-fill-hover);border:1px solid var(--ax-border);border-radius:var(--ax-radius-md);
+/* contenedor de fila + descripción plegable; sirve para armas y rasgos */
+.ax-item{background:var(--ax-fill-hover);border:1px solid var(--ax-border);
+  border-radius:var(--ax-radius-md);overflow:hidden;
   transition:background var(--ax-motion-fast) var(--ax-ease-standard),border-color var(--ax-motion-fast) var(--ax-ease-standard)}
-.ax-weapon[aria-pressed="true"]{border-color:rgba(var(--ax-accent-rgb),.42);
+.ax-item.is-sel{border-color:rgba(var(--ax-accent-rgb),.42);
   background:linear-gradient(90deg,rgba(var(--ax-accent-rgb),.14),rgba(var(--ax-accent-rgb),.03))}
+.ax-item__row{display:flex;align-items:stretch}
+.ax-item__more{flex:none;width:46px;font:inherit;cursor:pointer;color:var(--ax-text-subtle);
+  background:transparent;border:0;border-inline-start:1px solid var(--ax-border);
+  display:grid;place-items:center}
+.ax-item__more:hover{color:var(--ax-text);background:var(--ax-fill-hover)}
+.ax-item__more .ax-ico{transition:transform var(--ax-motion-base) var(--ax-ease-standard)}
+.ax-item__more[aria-expanded="true"] .ax-ico{transform:rotate(180deg);color:var(--ax-accent)}
+.ax-item__body{padding:var(--ax-space-4);border-top:1px dashed var(--ax-border);
+  font-size:var(--ax-text-xs);line-height:1.65;color:var(--ax-text-muted)}
+.ax-item__body[hidden]{display:none}
+.ax-item__body p+p{margin-top:var(--ax-space-3)}
+.ax-item__body strong{color:var(--ax-text-strong);font-weight:var(--ax-weight-semibold)}
+.ax-item__body em{font-style:normal;font-family:var(--ax-font-mono);color:var(--ax-text-subtle)}
+.ax-item__meta{display:block;font-family:var(--ax-font-mono);font-size:var(--ax-text-2xs);
+  color:var(--ax-text-subtle);margin-bottom:var(--ax-space-2)}
+/* cabecera pulsable completa: la usan los rasgos, que no se seleccionan */
+.ax-item__head{display:flex;align-items:center;gap:10px;width:100%;font:inherit;text-align:start;
+  cursor:pointer;background:transparent;border:0;color:var(--ax-text);
+  padding:var(--ax-space-3) var(--ax-space-3) var(--ax-space-3) var(--ax-space-4)}
+.ax-item__head>span{flex:1 1 auto;min-width:0}
+.ax-item__head:disabled{opacity:.4;cursor:not-allowed}
+.ax-item__row .ax-item__head{flex:1 1 auto;width:auto;min-width:0}
+.ax-item__head b{display:block;font-size:var(--ax-text-sm);
+  font-weight:var(--ax-weight-semibold);color:var(--ax-text-strong)}
+.ax-item__head small{display:block;font-size:var(--ax-text-2xs);color:var(--ax-text-subtle);margin-top:1px}
+.ax-item__head>.ax-ico:first-child{color:var(--ax-text-subtle)}
+.ax-item__head .ax-ico--chev{color:var(--ax-text-subtle);
+  transition:transform var(--ax-motion-base) var(--ax-ease-standard)}
+.ax-item__head[aria-expanded="true"] .ax-ico--chev{transform:rotate(180deg);color:var(--ax-accent)}
+/* conjuros del arma mágica */
+.ax-spell{margin-top:var(--ax-space-3);padding:var(--ax-space-3);
+  border-radius:var(--ax-radius-sm);background:var(--ax-surface-subtle);
+  border:1px solid var(--ax-border)}
+/* icono a la izquierda ocupando las dos filas: nombre arriba, escuela debajo */
+.ax-spell__h{display:grid;grid-template-columns:auto 1fr;align-items:center;
+  gap:1px 9px;margin-bottom:var(--ax-space-2)}
+.ax-spell__h .ax-ico{grid-row:1/-1;color:var(--ax-accent)}
+.ax-spell__h b,.ax-spell__h span{grid-column:2}
+.ax-spell__h b{font-size:var(--ax-text-sm);color:var(--ax-text-strong)}
+.ax-spell__h span{font-family:var(--ax-font-mono);font-size:var(--ax-text-2xs);color:var(--ax-text-subtle)}
+.ax-weapon{font:inherit;flex:1 1 auto;min-width:0;text-align:start;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:var(--ax-space-3);
+  padding:var(--ax-space-3) var(--ax-space-2) var(--ax-space-3) var(--ax-space-4);
+  color:var(--ax-text);background:transparent;border:0}
 .ax-weapon__id{display:flex;align-items:center;gap:10px;min-width:0}
 .ax-weapon__id .ax-ico{color:var(--ax-text-subtle)}
-.ax-weapon[aria-pressed="true"] .ax-ico{color:var(--ax-accent)}
+.ax-item.is-sel .ax-weapon__id .ax-ico{color:var(--ax-accent)}
 .ax-weapon__name{font-size:var(--ax-text-base);font-weight:var(--ax-weight-semibold);color:var(--ax-text-strong)}
 .ax-weapon__stats{font-family:var(--ax-font-mono);font-size:var(--ax-text-xs);
   color:var(--ax-text-muted);white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -256,6 +299,8 @@ body{
   background:var(--ax-fill-hover);border:1px solid var(--ax-border);
   transition:background var(--ax-motion-fast) var(--ax-ease-standard)}
 .ax-btn-ghost:hover{background:var(--ax-fill-active);color:var(--ax-text-strong)}
+.ax-btn-ghost:disabled{opacity:.45;cursor:not-allowed;color:var(--ax-text-subtle)}
+.ax-btn-ghost:disabled:hover{background:var(--ax-fill-hover);color:var(--ax-text-subtle)}
 .ax-btn-link{display:inline-flex;align-items:center;gap:5px;font:inherit;background:none;border:0;
   cursor:pointer;font-size:var(--ax-text-xs);font-weight:var(--ax-weight-semibold);color:var(--ax-accent)}
 .ax-btn-link .ax-ico{width:15px;height:15px}
@@ -337,6 +382,9 @@ details[open] summary::after{content:"−"}
   font-variant-numeric:tabular-nums}
 .ax-row button .ax-ico{color:var(--ax-text-subtle)}
 .ax-row>span{min-width:0}
+/* punto de acento = competente en esa salvación o habilidad */
+.ax-row.is-prof>span::before{content:"";display:inline-block;width:5px;height:5px;
+  border-radius:50%;background:var(--ax-accent);margin-inline-end:7px;vertical-align:middle}
 
 /* ══ registro + tarjeta de turno ══ */
 .ax-log{max-height:280px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
@@ -376,7 +424,7 @@ details[open] summary::after{content:"−"}
   background:rgba(6,8,12,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
   display:flex;flex-direction:column;justify-content:flex-end;padding:var(--ax-space-4)}
 .ax-overlay[hidden]{display:none}
-.ax-sheet{max-width:568px;margin:0 auto;width:100%;
+.ax-sheet{max-width:568px;margin:0 auto;width:100%;max-height:84vh;overflow-y:auto;
   background:var(--ax-surface-overlay);border:1px solid var(--ax-border-strong);
   border-radius:var(--ax-radius-xl);box-shadow:var(--ax-shadow-lg);padding:var(--ax-space-5);
   -webkit-backdrop-filter:blur(18px) saturate(1.1);backdrop-filter:blur(18px) saturate(1.1)}
@@ -472,6 +520,11 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
   <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></symbol>
   <symbol id="i-aviso" viewBox="0 0 24 24"><path d="M12 3.8 21.3 19.5H2.7z"/><path d="M12 9.5v4.2M12 16.7h.01"/></symbol>
   <symbol id="i-estrella" viewBox="0 0 24 24"><path d="m12 3.5 2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.9-5.4 2.9 1-6-4.4-4.3 6.1-.9z"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6.5 9.5 5.5 5.5 5.5-5.5"/></symbol>
+  <symbol id="i-mochila" viewBox="0 0 24 24"><path d="M6.5 10a5.5 5.5 0 0 1 11 0v8.8a1.7 1.7 0 0 1-1.7 1.7H8.2a1.7 1.7 0 0 1-1.7-1.7z"/><path d="M9.5 9.2V6.6a2.5 2.5 0 0 1 5 0v2.6"/><path d="M9.3 14.2h5.4"/></symbol>
+  <symbol id="i-dialogo" viewBox="0 0 24 24"><path d="M20.5 11.8c0 3.8-3.8 6.9-8.5 6.9-.9 0-1.8-.1-2.6-.3l-5.4 2 1.8-4.2c-1.4-1.2-2.3-2.8-2.3-4.4 0-3.8 3.8-6.9 8.5-6.9s8.5 3.1 8.5 6.9z"/></symbol>
+  <symbol id="i-magia" viewBox="0 0 24 24"><path d="M4.5 19.5 15 9"/><path d="M13.6 7.6 16.4 10.4"/><path d="m18.6 3 .8 2.4 2.4.8-2.4.8-.8 2.4-.8-2.4-2.4-.8 2.4-.8z"/></symbol>
+  <symbol id="i-huella" viewBox="0 0 24 24" fill="currentColor" stroke="none"><ellipse cx="7.4" cy="9.2" rx="1.9" ry="2.4"/><ellipse cx="12" cy="7.4" rx="2" ry="2.6"/><ellipse cx="16.6" cy="9.2" rx="1.9" ry="2.4"/><path d="M12 11.8c2.9 0 5.2 2.2 5.2 4.8 0 1.9-1.4 3.2-3.2 3.2-.8 0-1.4-.2-2-.2s-1.2.2-2 .2c-1.8 0-3.2-1.3-3.2-3.2 0-2.6 2.3-4.8 5.2-4.8z"/></symbol>
 </svg>
 <div class="ax-ambient" aria-hidden="true"><i></i></div>
 <div class="ax-shell">
@@ -500,51 +553,6 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
 
 <section class="ax-section">
   <div class="ax-section__head">
-    <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-espadas"/></svg>Postura</span>
-    <span class="ax-eyebrow" id="estado">En calma</span>
-  </div>
-  <div class="ax-switches">
-    <button class="ax-toggle" id="swFuria" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-furia"/></svg><span><b>Furia</b><small>+2 daño · resiste todo</small></span></button>
-    <button class="ax-toggle" id="swTemerario" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-espadas"/></svg><span><b>Temerario</b><small>ventaja · te la dan a ti</small></span></button>
-    <button class="ax-toggle" id="swGWM" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-pesada"/></svg><span><b>Armas pesadas</b><small>−5 atq · +10 daño</small></span></button>
-    <button class="ax-toggle" id="swVent" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-ventaja"/></svg><span><b>Ventaja</b><small>flanqueo · aliado</small></span></button>
-    <button class="ax-toggle" id="swDesv" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-desventaja"/></svg><span><b>Desventaja</b><small>cegado · cobertura</small></span></button>
-    <button class="ax-toggle" id="swFisico" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-dado"/></svg><span><b>Dados físicos</b><small>tú tiras, yo sumo</small></span></button>
-    <button class="ax-toggle" id="swReplica" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-replica"/></svg><span><b>Anunciar réplica</b><small>antes · d100 &lt; 50</small></span></button>
-  </div>
-  <div class="ax-note" id="bandaFuria" hidden>
-    <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-escudo"/></svg>Resiste todo salvo psíquico</span>
-    <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-ventaja"/></svg>Ventaja en FUE</span>
-    <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-veto"/></svg>Sin conjuros</span>
-    <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-reloj"/></svg>Acaba si no atacas ni te dañan</span>
-  </div>
-</section>
-
-<section class="ax-section">
-  <div class="ax-section__head"><span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-hacha"/></svg>Arma</span></div>
-  <div class="ax-weapons" id="armas"></div>
-</section>
-
-<div class="ax-actions">
-  <button class="ax-btn-primary" id="btnAtq1"></button>
-  <button class="ax-btn-primary" id="btnAtq2"></button>
-</div>
-<button class="ax-btn-ghost" id="btnFin" style="width:100%;margin-top:8px"><svg class="ax-ico" aria-hidden="true"><use href="#i-refresco"/></svg>Finalizar turno</button>
-
-<div class="ax-card ax-verdict" id="veredicto">
-  <div class="ax-verdict__empty">Elige arma y pulsa <strong>Ataque 1</strong>.</div>
-</div>
-
-<section class="ax-section">
-  <div class="ax-section__head">
-    <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-capas"/></svg>Reservas</span>
-    <button class="ax-btn-link" id="descansoLargo"><svg class="ax-ico" aria-hidden="true"><use href="#i-luna"/></svg>Descanso largo</button>
-  </div>
-  <div class="ax-card" id="recursos"></div>
-</section>
-
-<section class="ax-section">
-  <div class="ax-section__head">
     <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-corazon"/></svg>Vida</span>
     <span class="ax-eyebrow ax-num" id="pgTxt">110 / 110</span>
   </div>
@@ -563,19 +571,67 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
 </section>
 
 <section class="ax-section">
+  <div class="ax-section__head">
+    <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-espadas"/></svg>Postura</span>
+    <span class="ax-eyebrow" id="estado">En calma</span>
+  </div>
+  <div class="ax-switches">
+    <button class="ax-toggle" id="swFuria" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-furia"/></svg><span><b>Furia</b><small>+2 daño · resiste todo</small></span></button>
+    <button class="ax-toggle" id="swTemerario" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-espadas"/></svg><span><b>Temerario</b><small>ventaja · te la dan a ti</small></span></button>
+    <button class="ax-toggle" id="swGWM" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-pesada"/></svg><span><b>Armas pesadas</b><small>−5 atq · +10 daño</small></span></button>
+    <button class="ax-toggle" id="swVent" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-ventaja"/></svg><span><b>Ventaja</b><small>flanqueo · aliado</small></span></button>
+    <button class="ax-toggle" id="swDesv" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-desventaja"/></svg><span><b>Desventaja</b><small>cegado · cobertura</small></span></button>
+    <button class="ax-toggle" id="swFisico" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-dado"/></svg><span><b>Dados físicos</b><small>tú tiras, yo sumo</small></span></button>
+    <button class="ax-toggle" id="swReplica" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-replica"/></svg><span><b>Anunciar réplica</b><small>antes · d100 &lt; 50</small></span></button>
+  </div>
+  <div class="ax-note" id="bandaFuria" hidden>
+    <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-escudo"/></svg>Resiste todo salvo psíquico</span>
+    <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-ventaja"/></svg>Ventaja en FUE</span>
+    <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-veto"/></svg>Sin conjuros</span>
+    <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-reloj"/></svg>Acaba si no atacas ni te dañan</span>
+  </div>
+  <button class="ax-btn-ghost" id="btnLanzar" style="width:100%;margin-top:8px">
+    <svg class="ax-ico" aria-hidden="true"><use href="#i-magia"/></svg><span id="btnLanzarTxt">Lanzar conjuro</span>
+  </button>
+</section>
+
+<section class="ax-section">
+  <div class="ax-section__head"><span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-mochila"/></svg>Inventario</span></div>
+  <div class="ax-weapons" id="armas"></div>
+</section>
+
+<div class="ax-actions">
+  <button class="ax-btn-primary" id="btnAtq1"></button>
+  <button class="ax-btn-primary" id="btnAtq2"></button>
+</div>
+<button class="ax-btn-ghost" id="btnFin" style="width:100%;margin-top:8px"><svg class="ax-ico" aria-hidden="true"><use href="#i-refresco"/></svg>Finalizar turno</button>
+
+<div class="ax-card ax-verdict" id="veredicto">
+  <div class="ax-verdict__empty">Elige arma y pulsa <strong>Ataque 1</strong>.</div>
+</div>
+
+<section class="ax-section">
+  <div class="ax-section__head">
+    <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-magia"/></svg>Hechizos y usos</span>
+    <span class="ax-eyebrow" id="hechizosEstado"></span>
+  </div>
+  <div class="ax-weapons" id="hechizos"></div>
+</section>
+
+<section class="ax-section">
+  <div class="ax-section__head">
+    <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-capas"/></svg>Reservas</span>
+    <button class="ax-btn-link" id="descansoLargo"><svg class="ax-ico" aria-hidden="true"><use href="#i-luna"/></svg>Descanso largo</button>
+  </div>
+  <div class="ax-card" id="recursos"></div>
+</section>
+
+<section class="ax-section">
   <div class="ax-card" style="padding-block:0">
     <details><summary>Salvaciones</summary><div id="salvas" style="padding-bottom:8px"></div></details>
     <details><summary>Habilidades y pruebas</summary><div id="habs" style="padding-bottom:8px"></div></details>
-    <details><summary>Aliento de ácido y rasgos</summary>
-      <div style="padding-bottom:8px">
-        <div class="ax-row"><span>Aliento · línea 5×30 pies</span><em>3d6 ácido</em></div>
-        <div class="ax-row"><span>Salvación de Destreza</span><em>CD 15</em></div>
-        <div class="ax-row"><span>Resistencia racial</span><em>Ácido</em></div>
-        <div class="ax-row"><span>Sentido del peligro</span><em>Ventaja salv. DES</em></div>
-        <div class="ax-row"><span>Instinto salvaje</span><em>Ventaja iniciativa</em></div>
-        <div class="ax-row"><span>Lucha a ciegas</span><em>Visión ciega 10 pies</em></div>
-        <div class="ax-row"><span>Precipitación instintiva</span><em>Mover ½ al enfurecer</em></div>
-      </div>
+    <details><summary>Rasgos y aliento</summary>
+      <div class="ax-weapons" id="rasgos" style="padding-bottom:12px"></div>
     </details>
   </div>
 </section>
@@ -643,6 +699,15 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
   </div>
 </div>
 
+<div class="ax-overlay" id="lanzarPad" hidden>
+  <div class="ax-sheet">
+    <h3>¿Qué quieres lanzar?</h3>
+    <p>Pulsa el nombre para usarlo. La flecha abre la descripción.</p>
+    <div class="ax-weapons" id="listaLanzar" style="margin-top:16px"></div>
+    <button class="ax-sheet__x" data-lanzar="x"><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-equis"/></svg> Cancelar</button>
+  </div>
+</div>
+
 <div class="ax-overlay" id="resetPad" hidden>
   <div class="ax-sheet">
     <h3>¿Empezar de cero?</h3>
@@ -683,37 +748,182 @@ const PJ = {
   replicaModo: "x2",
   // salvaciones con ventaja: resaltan en la cabecera. El texto es el porqué.
   ventajaSalva: {FUE:"En furia", DES:"Sentido del peligro", CON:"Ventaja"},
+  // El bono se calcula solo: modificador del atributo + competencia si comp:true.
+  // Al subir de nivel basta con tocar mods y comp arriba.
   salvas: [
-    {n:"Fuerza", b:9, nota:"Ventaja en furia"},
-    {n:"Destreza", b:2, nota:"Ventaja · sentido del peligro"},
-    {n:"Constitución", b:7, nota:"Ventaja"},
-    {n:"Inteligencia", b:1, nota:""},
-    {n:"Sabiduría", b:1, nota:""},
-    {n:"Carisma", b:1, nota:""}
+    {n:"Fuerza", atr:"FUE", comp:true, nota:"Ventaja en furia"},
+    {n:"Destreza", atr:"DES", nota:"Ventaja · sentido del peligro"},
+    {n:"Constitución", atr:"CON", comp:true, nota:"Ventaja"},
+    {n:"Inteligencia", atr:"INT"},
+    {n:"Sabiduría", atr:"SAB"},
+    {n:"Carisma", atr:"CAR"}
   ],
   habs: [
-    {n:"Atletismo", b:9, nota:"Ventaja en furia"},
-    {n:"Medicina", b:5, nota:""},
-    {n:"Religión", b:5, nota:""},
-    {n:"Trato con animales", b:5, nota:""},
-    {n:"Iniciativa", b:2, nota:"Ventaja siempre"},
-    {n:"Intimidar / Persuasión", b:1, nota:"Presencia imponente"},
-    {n:"Percepción", b:1, nota:"Pasiva 11"},
-    {n:"Sigilo / Acrobacias", b:2, nota:""}
+    {n:"Iniciativa", atr:"DES", nota:"Ventaja siempre"},
+    {n:"Acrobacias", atr:"DES"},
+    {n:"Arcanos", atr:"INT"},
+    {n:"Atletismo", atr:"FUE", comp:true, nota:"Ventaja en furia"},
+    {n:"Engaño", atr:"CAR"},
+    {n:"Historia", atr:"INT"},
+    {n:"Interpretación", atr:"CAR"},
+    {n:"Intimidación", atr:"CAR", nota:"Presencia imponente"},
+    {n:"Investigación", atr:"INT"},
+    {n:"Juego de manos", atr:"DES"},
+    {n:"Medicina", atr:"SAB", comp:true},
+    {n:"Naturaleza", atr:"INT"},
+    {n:"Percepción", atr:"SAB", nota:"Pasiva 11"},
+    {n:"Perspicacia", atr:"SAB"},
+    {n:"Persuasión", atr:"CAR"},
+    {n:"Religión", atr:"INT", comp:true},
+    {n:"Sigilo", atr:"DES"},
+    {n:"Supervivencia", atr:"SAB"},
+    {n:"Trato con animales", atr:"SAB", comp:true}
   ],
   armas: [
     {id:"hacha", nombre:"Hacha de Golpe", ico:"hacha", dados:[1,12], tipo:"cortante",
-     cac:true, fue:true, pesada:true, magico:0},
+     cac:true, fue:true, pesada:true, magico:0,
+     desc:`<p>Arma marcial cuerpo a cuerpo con el perfil del hacha a dos manos:
+       <strong>1d12 cortante</strong>, pesada y a dos manos.</p>
+       <p><strong>Pesada.</strong> Las criaturas Pequeñas tienen desventaja al atacar con ella,
+       porque su tamaño y peso estorban. A ti no te afecta: eres Mediano.</p>
+       <p><strong>A dos manos.</strong> Requiere ambas manos para atacar, así que no puedes
+       llevar escudo mientras la empuñas.</p>
+       <p>Al ser pesada admite <strong>Maestro en Armas Pesadas</strong> (−5 al ataque, +10 al daño)
+       y, en cuerpo a cuerpo con Fuerza, la furia suma su bonificador de daño.</p>`},
     {id:"brazo", nombre:"Brazo de la Muerte", ico:"craneo", dados:[1,12], tipo:"necrótico",
-     cac:true, fue:true, pesada:true, magico:3},
+     cac:true, fue:true, pesada:true, magico:3,
+     desc:`<p><strong>Arma mágica +3.</strong> Suma +3 tanto a la tirada de ataque como a la de daño,
+       y cuenta como mágica para superar resistencias al daño no mágico.</p>
+       <p>Inflige <strong>1d12 necrótico</strong> en vez de cortante: pocas criaturas resisten el
+       necrótico, pero los no-muertos suelen ser inmunes. Pregunta al DM antes de contar con ello.</p>
+       <p>Además te permite lanzar los dos conjuros de abajo.</p>
+       <p><em>⚠ Lanzar un conjuro con un objeto mágico sigue siendo lanzar un conjuro: no puedes
+       hacerlo mientras estés en furia.</em></p>
+       <p><em>⚠ Pendiente del DM: usos por día de los conjuros, CD de salvación del objeto y si
+       cuenta como arma pesada para GWM (ahora la app asume que sí).</em></p>`,
+     conjuros:["animar","hablarMuertos"]},
     {id:"replica", nombre:"Hacha réplica", ico:"replica", dados:[1,12], tipo:"cortante",
      cac:true, fue:true, pesada:true, magico:0, replica:true,
-     aviso:"Homebrew: dados asumidos 1d12. Ajusta si tu DM usa otros."},
+     aviso:"Homebrew: dados asumidos 1d12. Ajusta si tu DM usa otros.",
+     desc:`<p>Homebrew. Perfil de hacha a dos manos: <strong>1d12 cortante</strong>, pesada.</p>
+       <p><strong>Daño de réplica.</strong> Debes <strong>anunciarlo antes de tirar</strong>. Si impactas,
+       tiras 1d100: con menos de 50 el golpe hace el doble de daño; con 50 o más no pasa nada.
+       Dos usos por descanso largo.</p>
+       <p><em>⚠ Tal como está la app, el uso se gasta al anunciarlo aunque el d100 falle, y el doble
+       se aplica al daño total. Los dados del arma están asumidos. Confírmalo todo con tu DM.</em></p>`},
     {id:"jabalina", nombre:"Jabalina", ico:"jabalina", dados:[1,6], tipo:"perforante",
-     cac:true, fue:true, pesada:false, magico:0},
+     cac:true, fue:true, pesada:false, magico:0,
+     desc:`<p>Arma sencilla cuerpo a cuerpo: <strong>1d6 perforante</strong>.</p>
+       <p><strong>Arrojadiza (30/120 pies).</strong> Puedes lanzarla usando el mismo modificador de
+       Fuerza que al blandirla. Para tirarla usa la entrada «Jabalina lanzada», que calcula distinto.</p>
+       <p>No es pesada, así que <strong>no</strong> admite Maestro en Armas Pesadas.</p>`},
     {id:"jabalinaL", nombre:"Jabalina lanzada", ico:"lanzada", dados:[1,6], tipo:"perforante",
      cac:false, fue:true, pesada:false, magico:0,
-     aviso:"Ataque a distancia: la furia NO suma su daño."}
+     aviso:"Ataque a distancia: la furia NO suma su daño.",
+     desc:`<p>La misma jabalina, arrojada: <strong>1d6 perforante</strong> a 30 pies, o hasta 120
+       con desventaja por alcance largo.</p>
+       <p><strong>La furia no suma su daño.</strong> El bonificador de furia solo se aplica a ataques
+       cuerpo a cuerpo con Fuerza, y esto es un ataque a distancia aunque uses Fuerza para tirarlo.</p>
+       <p>Tampoco admite Maestro en Armas Pesadas, porque la jabalina no es pesada.</p>`}
+  ],
+  // Todo lo que puedes activar: los conjuros del arma, el ritual del tótem,
+  // el rasgo de guerrero y la habilidad con animales.
+  hechizos: [
+    {id:"animar", n:"Animar a los muertos", ico:"craneo", tipo:"conjuro",
+     meta:"Nigromancia · nivel 3", fuente:"Brazo de la Muerte",
+        d:`<span class="ax-item__meta">Lanzamiento 1 minuto · Alcance 10 pies · Duración instantánea</span>
+          <p>Crea un sirviente no-muerto. Elige un montón de huesos o el cadáver de un humanoide
+          Mediano o Pequeño dentro del alcance: el conjuro lo llena de una burda imitación de vida y
+          lo alza como <strong>esqueleto</strong> (si elegiste huesos) o <strong>zombi</strong>
+          (si elegiste el cadáver). El DM tiene sus estadísticas.</p>
+          <p>En cada uno de tus turnos puedes usar una <strong>acción adicional</strong> para
+          ordenarle mentalmente qué hacer, siempre que esté a 60 pies o menos de ti; si controlas
+          varios, puedes darles la misma orden a todos a la vez. Decides qué acción toma y adónde se
+          mueve en su siguiente turno, o le das una orden general, como vigilar una sala o un pasillo.
+          Si no le das ninguna orden, solo se defiende de las criaturas hostiles. Una vez recibida una
+          orden, la sigue hasta completarla.</p>
+          <p>La criatura te obedece durante <strong>24 horas</strong>. Para mantener el control otras
+          24 debes volver a lanzarle el conjuro antes de que acabe el plazo; ese uso reafirma el
+          control sobre hasta cuatro criaturas que ya hayas animado, en vez de crear una nueva.</p>
+          <p><strong>A niveles superiores.</strong> Con un espacio de nivel 4 o más, animas o reafirmas
+          el control sobre dos criaturas más por cada nivel por encima del 3. Cada una debe venir de un
+          cadáver o montón de huesos distinto.</p>`},
+    {id:"hablarMuertos", n:"Hablar con los muertos", ico:"dialogo", tipo:"conjuro",
+     meta:"Nigromancia · nivel 3", fuente:"Brazo de la Muerte",
+        d:`<span class="ax-item__meta">Lanzamiento 1 acción · Alcance 10 pies · Duración 10 minutos</span>
+          <p>Concedes apariencia de vida e inteligencia a un cadáver dentro del alcance para que
+          responda a las preguntas que le hagas. El cadáver debe <strong>conservar la boca</strong> y
+          no puede ser un no-muerto. El conjuro falla si ese cadáver ya fue objetivo de este conjuro
+          en los últimos 10 días.</p>
+          <p>Hasta que el conjuro acabe puedes hacerle <strong>hasta cinco preguntas</strong>. El
+          cadáver solo sabe lo que sabía en vida, incluidos los idiomas que hablaba. Las respuestas
+          suelen ser breves, crípticas o repetitivas, y no está obligado a decir la verdad si le eres
+          hostil o te reconoce como enemigo.</p>
+          <p>El conjuro <strong>no devuelve el alma al cuerpo</strong>, solo su espíritu animador: el
+          cadáver no puede aprender nada nuevo, no comprende lo que ha pasado desde que murió ni puede
+          especular sobre el futuro.</p>`},
+    {id:"hablarAnimales", n:"Hablar con los animales", ico:"huella", tipo:"conjuro",
+     meta:"Adivinación · nivel 1 · solo ritual", fuente:"Buscador de espíritus",
+     d:`<span class="ax-item__meta">Lanzamiento 10 minutos (ritual) · Alcance personal · Duración 10 minutos</span>
+       <p>Durante la duración puedes <strong>comprender a las bestias y hablar con ellas</strong>.
+       Lo que saben y perciben está limitado por su inteligencia, pero como mínimo pueden darte
+       información sobre lugares y monstruos cercanos, incluido lo que hayan percibido en el último día.</p>
+       <p>Podrías convencer a una bestia de hacerte un <strong>pequeño favor</strong>, a criterio del DM.</p>
+       <p><strong>Solo como ritual.</strong> El tótem te deja lanzarlo sin gastar espacio de conjuro,
+       pero siempre como ritual: tarda 10 minutos, así que no sirve en mitad de un combate.</p>`},
+    {id:"trato", n:"Trato con animales", ico:"dado", tipo:"habilidad",
+     meta:"Habilidad de Sabiduría", fuente:"Competente",
+     tirada:{atr:"SAB", comp:true},
+     d:`<p>Prueba de <strong>Sabiduría (Trato con animales)</strong>. El DM te la pide cuando hay duda
+       sobre si consigues calmar a un animal doméstico, evitar que una montura se asuste o intuir las
+       intenciones de un animal.</p>
+       <p>También se usa para controlar a tu montura cuando le pides una maniobra arriesgada.</p>
+       <p><strong>No es un conjuro:</strong> puedes hacerla en furia. Al pulsarla aquí se tira sola.</p>`},
+    {id:"aliento2", n:"Tomar aliento", ico:"corazon-mas", tipo:"rasgo",
+     meta:"Rasgo de guerrero · acción adicional", fuente:"Guerrero 1",
+     recurso:"segundo", cura:{dados:[1,10], mas:1},
+     d:`<p>Con una <strong>acción adicional</strong> recuperas <strong>1d10 + tu nivel de guerrero</strong>
+       (1) puntos de golpe.</p>
+       <p>Un uso, y lo recuperas al terminar un <strong>descanso corto o largo</strong>.</p>
+       <p><strong>No es un conjuro:</strong> puedes usarlo en furia. Al pulsarlo aquí se gasta el
+       marcador de Reservas y los PG suben solos.</p>`}
+  ],
+  // Rasgos con descripción. Los de la clase y la raza vienen del SRD 5.1;
+  // los de estilo de combate y opcionales están resumidos con mis palabras.
+  rasgos: [
+    {id:"aliento", n:"Aliento de ácido", ico:"gota", tag:"3d6 · CD 15 · línea 5×30 pies",
+     d:`<p>Como acción, exhalas ácido en una <strong>línea de 5 pies de ancho por 30 de largo</strong>.
+       Cada criatura en el área hace una <strong>salvación de Destreza CD 15</strong>: recibe
+       <strong>3d6 de daño de ácido</strong> si falla, y la mitad si tiene éxito.</p>
+       <p>El daño sube con el nivel: 2d6 al principio, 3d6 a nivel 6, 4d6 a nivel 11 y 5d6 a nivel 16.</p>
+       <p>Un uso, y lo recuperas al terminar un <strong>descanso corto o largo</strong>.</p>
+       <p><em>La CD sale de 8 + tu competencia (+4) + tu modificador de Constitución (+3) = 15.</em></p>`},
+    {id:"resist", n:"Resistencia al ácido", ico:"escudo", tag:"Ancestro dracónico",
+     d:`<p>Tienes <strong>resistencia al daño de ácido</strong>: recibes la mitad, redondeando hacia abajo.</p>
+       <p>En furia además resistes todo el daño salvo el psíquico, así que mientras estés enfurecido
+       esta resistencia no añade nada: las resistencias <strong>no se acumulan</strong>. Cuenta cuando
+       la furia no está activa.</p>`},
+    {id:"peligro", n:"Sentido del peligro", ico:"ventaja", tag:"Ventaja en salv. DES",
+     d:`<p>Tienes <strong>ventaja en las salvaciones de Destreza contra efectos que puedas ver</strong>,
+       como trampas y conjuros.</p>
+       <p>No obtienes el beneficio si estás <strong>cegado, ensordecido o incapacitado</strong>.</p>`},
+    {id:"instinto", n:"Instinto salvaje", ico:"reloj", tag:"Ventaja en iniciativa",
+     d:`<p>Tus instintos están tan afinados que tienes <strong>ventaja en las tiradas de iniciativa</strong>.</p>
+       <p>Además, si te <strong>sorprenden</strong> al empezar el combate y no estás incapacitado,
+       puedes actuar con normalidad en tu primer turno, pero solo si <strong>entras en furia antes de
+       hacer cualquier otra cosa</strong> en ese turno.</p>`},
+    {id:"ciegas", n:"Lucha a ciegas", ico:"veto", tag:"Visión ciega 10 pies",
+     d:`<p>Estilo de combate. Tienes <strong>visión ciega hasta 10 pies</strong>: dentro de ese radio
+       percibes cualquier cosa que no esté tras cobertura total, aunque estés cegado o a oscuras.</p>
+       <p>También detectas ahí a las criaturas <strong>invisibles</strong>, salvo que consigan
+       esconderse de ti.</p>
+       <p><em>No es contenido SRD; resumido a partir del rasgo del estilo de combate.</em></p>`},
+    {id:"pounce", n:"Precipitación instintiva", ico:"furia", tag:"Mover ½ al enfurecer",
+     d:`<p>Rasgo opcional de bárbaro. Como parte de la <strong>acción adicional con la que entras en
+       furia</strong>, puedes moverte hasta la <strong>mitad de tu velocidad</strong>: 20 pies.</p>
+       <p>Es movimiento aparte del normal del turno, así que sirve para cerrar distancia y aun así
+       atacar dos veces.</p>
+       <p><em>No es contenido SRD; resumido a partir del rasgo opcional.</em></p>`}
   ],
   recursos: [
     {id:"furias", n:"Furias", s:"Descanso largo", ico:"furia", max:4},
@@ -733,6 +943,7 @@ const S = {
   furia:false, temerario:false, gwm:false, ventaja:false, desventaja:false,
   fisico:false, replica:false,
   arma:"hacha", pg:PJ.pgMax, turnoNum:1, acciones:[], slots:{},
+  abiertos:{},   // descripciones desplegadas, por id
   usos:Object.fromEntries(PJ.recursos.map(r=>[r.id, r.max]))
 };
 const $ = s => document.querySelector(s);
@@ -1025,18 +1236,143 @@ function finalizarTurno(){
   pintarVeredicto();
 }
 
+/* ── descripciones plegables: armas y rasgos comparten mecanismo ── */
+function botonMas(id, etiqueta){
+  return `<button class="ax-item__more" data-desc="${id}" aria-expanded="${!!S.abiertos[id]}"
+    aria-controls="d-${id}" aria-label="Descripción de ${etiqueta}">${ico("chevron")}</button>`;
+}
+function cuerpoDesc(id, html){
+  return `<div class="ax-item__body" id="d-${id}" ${S.abiertos[id] ? "" : "hidden"}>${html}</div>`;
+}
+const hechizo = id => PJ.hechizos.find(h=>h.id === id);
+function fichaConjuro(id){
+  const c = hechizo(id);
+  if(!c) return "";
+  return `<div class="ax-spell">
+    <div class="ax-spell__h">${ico(c.ico)}<b>${c.n}</b><span>${c.meta}</span></div>
+    ${c.d}</div>`;
+}
+
+// un solo oyente delegado: sobrevive a los repintados de la lista de armas
+document.addEventListener("click", e=>{
+  const b = e.target.closest("[data-desc]");
+  if(!b) return;
+  const id = b.dataset.desc;
+  S.abiertos[id] = !S.abiertos[id];
+  b.setAttribute("aria-expanded", S.abiertos[id]);
+  const panel = document.getElementById("d-" + id);
+  if(panel) panel.hidden = !S.abiertos[id];
+  guardar();
+});
+
 function pintarArmas(){
   $("#armas").innerHTML = PJ.armas.map(a=>{
     const ctx = contexto(a);
     const [n,c] = a.dados;
-    return `<button class="ax-weapon" data-arma="${a.id}" aria-pressed="${S.arma===a.id}">
-      <span class="ax-weapon__id">${ico(a.ico)}<span><span class="ax-weapon__name">${a.nombre}</span>${a.aviso?'<span class="ax-badge">revisar</span>':''}</span></span>
-      <span class="ax-weapon__stats">+${ctx.bonoAtaque} · ${n}d${c}+${ctx.bonoDano}</span>
-    </button>`;
+    const cuerpo = (a.desc || "") + (a.conjuros
+      ? `<div class="ax-spell__h" style="margin-top:16px">${ico("magia")}<b>Conjuros del arma</b></div>`
+        + a.conjuros.map(fichaConjuro).join("")
+      : "");
+    return `<div class="ax-item ${S.arma===a.id ? "is-sel" : ""}">
+      <div class="ax-item__row">
+        <button class="ax-weapon" data-arma="${a.id}" aria-pressed="${S.arma===a.id}">
+          <span class="ax-weapon__id">${ico(a.ico)}<span><span class="ax-weapon__name">${a.nombre}</span>${a.aviso?'<span class="ax-badge">revisar</span>':''}</span></span>
+          <span class="ax-weapon__stats">+${ctx.bonoAtaque} · ${n}d${c}+${ctx.bonoDano}</span>
+        </button>
+        ${botonMas(a.id, a.nombre)}
+      </div>
+      ${cuerpo ? cuerpoDesc(a.id, cuerpo) : ""}
+    </div>`;
   }).join("");
   $("#armas").querySelectorAll(".ax-weapon").forEach(b=>{
     b.onclick = ()=>{ S.arma = b.dataset.arma; pintarEstado(); };
   });
+}
+
+function pintarHechizos(){
+  $("#hechizos").innerHTML = PJ.hechizos.map(h=>{
+    const id = "h-" + h.id;
+    return `<div class="ax-item">
+      <button class="ax-item__head" data-desc="${id}" aria-expanded="${!!S.abiertos[id]}" aria-controls="d-${id}">
+        ${ico(h.ico)}<span><b>${h.n}</b><small>${h.meta} · ${h.fuente}</small></span>${ico("chevron","ax-ico--chev")}
+      </button>
+      ${cuerpoDesc(id, h.d)}
+    </div>`;
+  }).join("");
+}
+
+/* ── lanzar: elegir qué usar, con su descripción a mano ── */
+function etiquetaUso(h){
+  if(h.recurso){
+    const q = S.usos[h.recurso];
+    return `${h.meta} · queda${q===1?"":"n"} ${q}`;
+  }
+  if(h.tirada){ const b = bono(h.tirada); return `${h.meta} · ${b>=0?"+":""}${b}`; }
+  return `${h.meta} · ${h.fuente}`;
+}
+
+function preguntarLanzar(){
+  return new Promise(resolve=>{
+    $("#listaLanzar").innerHTML = PJ.hechizos.map(h=>{
+      const id = "l-" + h.id;
+      const sinUsos = h.recurso && S.usos[h.recurso] <= 0;
+      return `<div class="ax-item">
+        <div class="ax-item__row">
+          <button class="ax-item__head" data-lanzar="${h.id}" ${sinUsos?"disabled":""}>
+            ${ico(h.ico)}<span><b>${h.n}</b><small>${sinUsos ? "Sin usos hasta el descanso" : etiquetaUso(h)}</small></span>
+          </button>
+          ${botonMas(id, h.n)}
+        </div>
+        ${cuerpoDesc(id, h.d)}
+      </div>`;
+    }).join("");
+    const pad = $("#lanzarPad"); pad.hidden = false;
+    pad.onclick = e=>{
+      if(e.target.closest("[data-desc]")) return;   // la flecha solo despliega, no elige
+      const b = e.target.closest("[data-lanzar]");
+      if(!b) return;
+      pad.hidden = true; pad.onclick = null;
+      resolve(b.dataset.lanzar === "x" ? null : b.dataset.lanzar);
+    };
+  });
+}
+
+async function lanzar(){
+  const id = await preguntarLanzar();
+  if(!id) return;
+  const h = hechizo(id);
+  if(h.recurso){
+    if(S.usos[h.recurso] <= 0){ log(`${h.n}: sin usos.`); return; }
+    S.usos[h.recurso]--; pintarRecursos();
+  }
+  if(h.cura){
+    const [n, caras] = h.cura.dados;
+    let suma = 0;
+    for(let i=0;i<n;i++) suma += d(caras);
+    const total = suma + h.cura.mas;
+    const antes = S.pg;
+    S.pg = Math.min(PJ.pgMax, S.pg + total);      // curarse no pasa del máximo
+    pintarPG();
+    const real = S.pg - antes;
+    log(`${h.n}: ${n}d${caras} [${suma}] +${h.cura.mas} = ${total} PG` + (real < total ? ` (curas ${real}, tope)` : ""));
+  } else if(h.tirada){
+    const b = bono(h.tirada), r = d(20);
+    log(`${h.n}: d20 [${r}] ${b>=0?"+":""}${b} = ${r + b}`);
+  } else {
+    log(`Lanzas ${h.n} · ${h.fuente}.`);
+  }
+}
+
+function pintarRasgos(){
+  $("#rasgos").innerHTML = PJ.rasgos.map(r=>{
+    const id = "r-" + r.id;
+    return `<div class="ax-item">
+      <button class="ax-item__head" data-desc="${id}" aria-expanded="${!!S.abiertos[id]}" aria-controls="d-${id}">
+        ${ico(r.ico)}<span><b>${r.n}</b><small>${r.tag}</small></span>${ico("chevron","ax-ico--chev")}
+      </button>
+      ${cuerpoDesc(id, r.d)}
+    </div>`;
+  }).join("");
 }
 
 function pintarRecursos(){
@@ -1060,6 +1396,8 @@ function pintarRecursos(){
 
 const ATRIBUTOS = {FUE:"Fuerza", DES:"Destreza", CON:"Constitución",
                    INT:"Inteligencia", SAB:"Sabiduría", CAR:"Carisma"};
+// bono de una salvación, habilidad o prueba: atributo + competencia si toca
+const bono = x => PJ.mods[x.atr] + (x.comp ? PJ.comp : 0);
 
 function pintarAtributos(){
   $("#atributos").innerHTML = Object.keys(ATRIBUTOS).map(k=>{
@@ -1071,8 +1409,11 @@ function pintarAtributos(){
 }
 
 function pintarListas(){
-  const fila = x => `<div class="ax-row"><span>${x.n}${x.nota?`<em>${x.nota}</em>`:''}</span>
-    <button data-b="${x.b}" data-n="${x.n}">${ico("dado","ax-ico--sm")}+${x.b}</button></div>`;
+  const fila = x => {
+    const b = bono(x), signo = b >= 0 ? "+" : "";
+    return `<div class="ax-row${x.comp?" is-prof":""}"><span>${x.n}${x.nota?`<em>${x.nota}</em>`:''}</span>
+      <button data-b="${b}" data-n="${x.n}">${ico("dado","ax-ico--sm")}${signo}${b}</button></div>`;
+  };
   $("#salvas").innerHTML = PJ.salvas.map(fila).join("");
   $("#habs").innerHTML = PJ.habs.map(fila).join("");
   document.querySelectorAll(".ax-row button").forEach(b=>{
@@ -1123,6 +1464,10 @@ function pintarEstado(){
   $("#bandaFuria").hidden = !S.furia;
   pintarRetrato();
   $("#swReplica").disabled = !armaActual().replica;
+  // en furia no se lanzan conjuros: se bloquea el botón y se dice por qué
+  $("#btnLanzar").disabled = S.furia;
+  $("#btnLanzarTxt").textContent = S.furia ? "En furia no puedes lanzar" : "Lanzar conjuro";
+  $("#hechizosEstado").textContent = S.furia ? "Conjuros bloqueados" : "";
   pintarArmas();
   guardar();
 }
@@ -1188,7 +1533,7 @@ function guardarYa(){
     v:1, ts,
     s:{
       arma:S.arma, pg:S.pg, turnoNum:S.turnoNum,
-      usos:S.usos, acciones:S.acciones, slots:S.slots,
+      usos:S.usos, acciones:S.acciones, slots:S.slots, abiertos:S.abiertos,
       ...Object.fromEntries(BANDERAS.map(k=>[k, S[k]]))
     },
     log: $("#log").innerHTML
@@ -1229,6 +1574,12 @@ function restaurar(){
     const v = s.usos && s.usos[r.id];
     if(Number.isFinite(v)) S.usos[r.id] = Math.max(0, Math.min(r.max, v));
   });
+
+  // descripciones que quedaron desplegadas; solo ids que sigan existiendo
+  if(s.abiertos && typeof s.abiertos === "object"){
+    const validos = new Set([...PJ.armas.map(a=>a.id), ...PJ.rasgos.map(r=>"r-"+r.id)]);
+    Object.keys(s.abiertos).forEach(k=>{ if(validos.has(k) && s.abiertos[k]) S.abiertos[k] = true; });
+  }
 
   if(Array.isArray(s.acciones)) S.acciones = s.acciones;          // turno a medias
   if(s.slots) [1,2].forEach(n=>{ if(typeof s.slots[n] === "string") S.slots[n] = s.slots[n]; });
@@ -1276,6 +1627,7 @@ toggle("#swReplica","replica");
 $("#btnAtq1").onclick = ()=>atacar(1);
 $("#btnAtq2").onclick = ()=>atacar(2);
 $("#btnFin").onclick    = finalizarTurno;
+$("#btnLanzar").onclick = lanzar;
 $("#limpiar").onclick   = ()=>{ $("#log").innerHTML = ""; guardar(); };
 $("#borrarGuardado").onclick = async ()=>{ if(await hoja("#resetPad","reset")) borrarGuardado(); };
 $("#descansoLargo").onclick = ()=>{
@@ -1291,7 +1643,8 @@ $("#pgIn").onchange = e => { S.pg = +e.target.value || 0; pintarPG(); };
 $("#tCA").textContent = PJ.ca;
 restaurar();                  // lee el guardado antes del primer pintado
 sincronizarInterruptores();
-pintarAtributos(); pintarRecursos(); pintarListas(); pintarPG(); pintarEstado(); pintarVeredicto();
+pintarAtributos(); pintarRecursos(); pintarListas(); pintarRasgos(); pintarHechizos();
+pintarPG(); pintarEstado(); pintarVeredicto();
 </script>
 </body>
 </html>
