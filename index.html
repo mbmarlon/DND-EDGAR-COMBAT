@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0A0C11">
-<title>Edgar 2 — Asistente de combate</title>
+<!-- favicon: Favicon.jpg recortado a la cabeza, reescalado y cuantizado a 8 colores -->
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAABYR2ztAAAAGFBMVEWc8CyL1ilZiR0bKgwCAgEAAAEBAAAAAABglSjxAAAFEklEQVR42l1VwZajNhBsiXyABN6XqxBMuGIgyzUG2X2OPfvmvsuuzwtt6/dTsmcnL/G8wVgUre7qqhbFj8/CH7f3IL9u6WMxxPu/4Bj4/4AlTsOvRdkq4P8LkNjZ4frxvqsi/wI8d+OJdh/7xuvfVMnt7QkIz6CGxn+TxE81HlPcSAEAYd4rLVHSfXrhyM5k8kiVHmshGJMt31Pq6Z/5dFBqYEmAR4KyKqTw3CwllBZMw+GjiuuB6JPIkw7sGOWrUpnwO4Ajd848i5BneYigquWdh/TOmVTxAHAvidHrwZoXPAh3itf6HtkpPSAjpGvHwBzD7KwG4CuTbDuRoykpf8VWCLXj2114T9oyX/8eKWzZEk6VszSGox9bq6U8hY2s7pi5bSisWsLrbMkUMlNjrJrpD/BGduDALgHUGMJaKip4y3tD1JeNTGTyGhmZHclKL4Enb0yVj501nmwVyl4pX0lYKQGUfuOpcni0O1DWt1T8pErprpbozKcUwVSvW2XIKt2bijrqnbGU982xI9OgTEV6DJPvSyLtSpTX4qbvXsJsjBkhGE95fZ2azipL1jyvyl9qWY3xAPBskM80GKVKq1AF2dwYGmqeShqYwuu19D5socTGRVlaq/ekVD6M7EukD8GcLp0PLFWHABckArJ01bFw5wd5tltGXEI8KBp730NdRYRz7tv4rgfhZIQ4B1dcfO+bTo19jNPIcnpX1D3MahjbYp5yJFnWw5TJbOrwS1EQthilV82tURZ8Rdfs0d0YTpGfxrnUe2NfQijBmmnKEC5W5dMA/UeSR6dUBab90Q3OqDm/ecgDi+AHvmD0lqiwxmh/UA50F95BDnsytAsPwIJOKrsHxzkp/CWuNRqvoJRIyUiTgkAqj2fpg75S1St6cZU8q7jHfivVCLdZm1qBS7aZ/HOfPELvbpEe6jCkywdGqbeZJf5IPDyMlEZSyPe6q8KX0FVOl58f5D+IOiZLd3XYxvOuX/e+GM7neoOEiiegTlaNXfXG8v2i2tLrzPwJb90OGjFQBToN705VL3zyphuOQ2F8eOW+LSBrFtqY5ZvJq33ouTcYGvBhH+aQt2WiQVKSy5ly3zad3FwaKjeYsl8zR4lI9AJVfvNdWWZ7TKpT4i0Xrg4azKe5+D4nXal0O4Y1TTqpF4GPSL19DNIfZwLxbXO6QQEps60AZygQYoMewl2cqZRxDciLiHqVFcJPvbpCMBKPIY0w5NQwQySXSmS1hP5RsQSh0/zjPnvbTMZ8WoJRg0N1q1X1Zv0Q1oa+e4lv8YvYBDirtNduAcCOX9CCTdNUiCDSV+jg99BiSiilF8xVegHRGEXUVWnC/jhAJQ3D18hN31f8SmMxWR8Ajndu1Z52M96Ef9FUKpyWhcMTkNzX/dnabD9DT2Rq/5fVm8cZMAAwYQuRV5Cp1XyDqFB+70qNYRpPNQBrEXtZG+Sj3VAnhvVltA4LtyANAFsRO1l/WwKXbdXA4CpbK+1luQ6vW7NqEn+fwhnDNKwHZKcscpyyeoHkEHjNiL2s4xlzGLLI9sGRGv3PHYejy+QwrjviLqyfNhwvKFq3zcXX6SuEk8ui458NnSbecJvUJbYtgNtnDrMjAmXjYcScHBf7ehjTueO6vOo7v4PmuD983jTyp5OM7MZvOGlwFtazVaqetYgU2/2QgQFqjoERmdsRalDV3A+dKyQkV0BBQ0wH8v2gcTJkko7fvC+NavBTy4bS5P4PPQX9kq6lzysAAAAASUVORK5CYII=">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<title>EDGAR — Clero de Shaviri</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -111,10 +114,35 @@ body{
 .ax-stack{display:flex;flex-direction:column;gap:var(--ax-space-4)}
 :where(button,[tabindex]):focus-visible{outline:2px solid var(--ax-focus-ring);outline-offset:2px;border-radius:inherit}
 
+/* ══ iconos ══ */
+.ax-sprite{position:absolute;width:0;height:0;overflow:hidden}
+.ax-ico{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round;vertical-align:-3px}
+.ax-ico--sm{width:14px;height:14px;vertical-align:-2px;stroke-width:1.9}
+.ax-eyebrow .ax-ico{width:13px;height:13px;vertical-align:-2px;margin-inline-end:5px;stroke-width:2}
+
 /* ══ cabecera ══ */
 .ax-hero{padding:var(--ax-space-6) 0 var(--ax-space-4)}
 .ax-hero h1{font-family:var(--ax-font-display);font-size:var(--ax-text-2xl);
   font-weight:var(--ax-weight-bold);letter-spacing:-.018em;color:var(--ax-text-strong);margin-top:var(--ax-space-1)}
+.ax-hero h1 span{font-size:var(--ax-text-md);font-weight:var(--ax-weight-medium);
+  letter-spacing:0;color:var(--ax-text-muted);white-space:nowrap}
+
+/* ══ atributos ══ */
+.ax-attrs{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:var(--ax-space-2)}
+.ax-attr{position:relative;padding:9px 2px 7px;text-align:center;
+  border-radius:var(--ax-radius-md);background:var(--ax-fill-hover);border:1px solid var(--ax-border)}
+.ax-attr b{display:block;font-family:var(--ax-font-display);font-size:var(--ax-text-md);
+  font-weight:var(--ax-weight-semibold);color:var(--ax-text-strong);
+  font-variant-numeric:tabular-nums;line-height:1.1}
+.ax-attr span{font-size:var(--ax-text-2xs);letter-spacing:.05em;color:var(--ax-text-subtle)}
+/* mismo resaltado que el arma seleccionada: ventaja en esa salvación */
+.ax-attr.is-adv{border-color:rgba(var(--ax-accent-rgb),.42);
+  background:linear-gradient(180deg,rgba(var(--ax-accent-rgb),.16),rgba(var(--ax-accent-rgb),.03))}
+.ax-attr.is-adv span{color:var(--ax-text-muted)}
+.ax-attr .ax-ico{position:absolute;top:3px;inset-inline-end:3px;width:11px;height:11px;
+  stroke-width:2.4;color:var(--ax-accent)}
+@media (max-width:340px){.ax-attr .ax-ico{display:none}}
 .ax-hero p{font-size:var(--ax-text-sm);color:var(--ax-text-muted);margin-top:var(--ax-space-1)}
 .ax-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--ax-space-2);margin-top:var(--ax-space-4)}
 .ax-kpi{padding:var(--ax-space-3) var(--ax-space-2);text-align:center;border-radius:var(--ax-radius-lg)}
@@ -157,7 +185,8 @@ body{
 /* ══ interruptores ══ */
 .ax-switches{display:grid;grid-template-columns:1fr 1fr;gap:var(--ax-space-2)}
 .ax-toggle{position:relative;font:inherit;text-align:start;cursor:pointer;
-  min-height:60px;padding:var(--ax-space-3) var(--ax-space-4);
+  display:flex;align-items:flex-start;gap:10px;
+  min-height:60px;padding:var(--ax-space-3);
   background:var(--ax-fill-hover);border:1px solid var(--ax-border);
   border-radius:var(--ax-radius-md);color:var(--ax-text);
   font-size:var(--ax-text-sm);font-weight:var(--ax-weight-semibold);
@@ -172,12 +201,21 @@ body{
   box-shadow:inset 0 0 0 1px rgba(var(--ax-accent-rgb),.14),0 8px 22px -14px rgba(var(--ax-accent-rgb),.8)}
 .ax-toggle[aria-pressed="true"] small{color:var(--ax-text-muted)}
 .ax-toggle:disabled{opacity:.32;cursor:not-allowed}
+.ax-toggle>span{flex:1 1 auto;min-width:0}
+.ax-toggle b{display:block;font-weight:inherit}
+.ax-toggle .ax-ico{margin-top:1px;color:var(--ax-text-subtle);
+  transition:color var(--ax-motion-fast) var(--ax-ease-standard)}
+.ax-toggle[aria-pressed="true"] .ax-ico{color:var(--ax-accent)}
 
-.ax-note{display:flex;gap:var(--ax-space-3);margin-top:var(--ax-space-3);
-  padding:var(--ax-space-3) var(--ax-space-4);border-radius:var(--ax-radius-md);
-  background:var(--ax-accent-wash);border:1px solid rgba(var(--ax-accent-rgb),.28);
-  font-size:var(--ax-text-xs);line-height:1.55;color:var(--ax-text)}
-.ax-note strong{color:var(--ax-text-strong)}
+.ax-note{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--ax-space-3);
+  padding:var(--ax-space-3);border-radius:var(--ax-radius-md);
+  background:var(--ax-accent-wash);border:1px solid rgba(var(--ax-accent-rgb),.28)}
+.ax-note[hidden]{display:none}   /* display:flex gana al atributo hidden si no se dice esto */
+.ax-note span{display:inline-flex;align-items:center;gap:6px;
+  padding:5px 10px 5px 8px;border-radius:var(--ax-radius-pill);
+  background:rgba(var(--ax-accent-rgb),.12);color:var(--ax-text);
+  font-size:var(--ax-text-2xs);line-height:1.3}
+.ax-note .ax-ico{color:var(--ax-accent)}
 
 /* ══ armas ══ */
 .ax-weapons{display:flex;flex-direction:column;gap:var(--ax-space-2)}
@@ -188,6 +226,9 @@ body{
   transition:background var(--ax-motion-fast) var(--ax-ease-standard),border-color var(--ax-motion-fast) var(--ax-ease-standard)}
 .ax-weapon[aria-pressed="true"]{border-color:rgba(var(--ax-accent-rgb),.42);
   background:linear-gradient(90deg,rgba(var(--ax-accent-rgb),.14),rgba(var(--ax-accent-rgb),.03))}
+.ax-weapon__id{display:flex;align-items:center;gap:10px;min-width:0}
+.ax-weapon__id .ax-ico{color:var(--ax-text-subtle)}
+.ax-weapon[aria-pressed="true"] .ax-ico{color:var(--ax-accent)}
 .ax-weapon__name{font-size:var(--ax-text-base);font-weight:var(--ax-weight-semibold);color:var(--ax-text-strong)}
 .ax-weapon__stats{font-family:var(--ax-font-mono);font-size:var(--ax-text-xs);
   color:var(--ax-text-muted);white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -215,8 +256,9 @@ body{
   background:var(--ax-fill-hover);border:1px solid var(--ax-border);
   transition:background var(--ax-motion-fast) var(--ax-ease-standard)}
 .ax-btn-ghost:hover{background:var(--ax-fill-active);color:var(--ax-text-strong)}
-.ax-btn-link{font:inherit;background:none;border:0;cursor:pointer;
-  font-size:var(--ax-text-xs);font-weight:var(--ax-weight-semibold);color:var(--ax-accent)}
+.ax-btn-link{display:inline-flex;align-items:center;gap:5px;font:inherit;background:none;border:0;
+  cursor:pointer;font-size:var(--ax-text-xs);font-weight:var(--ax-weight-semibold);color:var(--ax-accent)}
+.ax-btn-link .ax-ico{width:15px;height:15px}
 
 /* ══ veredicto ══ */
 .ax-verdict{margin-top:var(--ax-space-4);padding:0;overflow:hidden}
@@ -249,7 +291,9 @@ body{
 .ax-res{display:flex;align-items:center;justify-content:space-between;gap:var(--ax-space-3);
   padding:var(--ax-space-3) 0;border-bottom:1px solid var(--ax-border)}
 .ax-res:last-child{border-bottom:0}
-.ax-res__n{font-size:var(--ax-text-sm);font-weight:var(--ax-weight-semibold);color:var(--ax-text-strong)}
+.ax-res__n{display:flex;align-items:center;gap:10px;min-width:0;
+  font-size:var(--ax-text-sm);font-weight:var(--ax-weight-semibold);color:var(--ax-text-strong)}
+.ax-res__n .ax-ico{color:var(--ax-text-subtle)}
 .ax-res__n small{display:block;font-weight:400;color:var(--ax-text-subtle);font-size:var(--ax-text-2xs);margin-top:1px}
 .ax-pips{display:flex;gap:6px;flex-shrink:0}
 .ax-pip{width:28px;height:28px;border:1px solid var(--ax-border-strong);border-radius:var(--ax-radius-pill);
@@ -286,10 +330,13 @@ details[open] summary::after{content:"−"}
   padding:var(--ax-space-2) 0 var(--ax-space-3);font-size:var(--ax-text-sm)}
 .ax-row em{font-style:normal;color:var(--ax-accent);font-size:var(--ax-text-2xs);
   letter-spacing:.05em;text-transform:uppercase;font-weight:var(--ax-weight-semibold);display:block}
-.ax-row button{font:inherit;font-family:var(--ax-font-mono);background:var(--ax-fill-hover);
-  border:1px solid var(--ax-border);color:var(--ax-text-strong);padding:8px var(--ax-space-4);
-  border-radius:var(--ax-radius-sm);cursor:pointer;font-size:var(--ax-text-sm);min-width:60px;
+.ax-row button{display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  font:inherit;font-family:var(--ax-font-mono);background:var(--ax-fill-hover);
+  border:1px solid var(--ax-border);color:var(--ax-text-strong);padding:8px var(--ax-space-3);
+  border-radius:var(--ax-radius-sm);cursor:pointer;font-size:var(--ax-text-sm);min-width:68px;
   font-variant-numeric:tabular-nums}
+.ax-row button .ax-ico{color:var(--ax-text-subtle)}
+.ax-row>span{min-width:0}
 
 /* ══ registro + tarjeta de turno ══ */
 .ax-log{max-height:280px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
@@ -306,6 +353,12 @@ details[open] summary::after{content:"−"}
 .ax-tcard ul{list-style:none;margin-top:var(--ax-space-3)}
 .ax-tcard li{display:flex;justify-content:space-between;gap:var(--ax-space-3);
   padding:6px 0;border-bottom:1px solid var(--ax-border);font-size:var(--ax-text-sm)}
+.ax-tcard li>span{display:flex;align-items:center;gap:7px;min-width:0}
+.ax-tcard li .ax-ico{color:var(--ax-text-subtle)}
+.ax-tcard li.is-crit .ax-ico{color:var(--ax-success-500)}
+.ax-tcard li.is-miss .ax-ico{color:var(--ax-danger-500)}
+.ax-tcard__reset{display:flex;align-items:flex-start;gap:7px}
+.ax-tcard__reset .ax-ico{color:var(--ax-text-subtle);margin-top:1px}
 .ax-tcard li:last-child{border-bottom:0}
 .ax-tcard li b{font-family:var(--ax-font-mono);font-weight:var(--ax-weight-semibold);
   white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--ax-text)}
@@ -343,13 +396,21 @@ details[open] summary::after{content:"−"}
 .ax-dice[data-kind="attack"] button[data-cara="20"]{border-color:var(--ax-success-500);color:var(--ax-success-500)}
 .ax-dice[data-kind="attack"] button[data-cara="1"]{border-color:var(--ax-danger-500);color:var(--ax-danger-500)}
 .ax-choice{display:grid;grid-template-columns:1fr 1fr;gap:var(--ax-space-2);margin-top:var(--ax-space-4)}
-.ax-choice button{font:inherit;font-weight:var(--ax-weight-semibold);font-size:var(--ax-text-sm);
+.ax-choice button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  font:inherit;font-weight:var(--ax-weight-semibold);font-size:var(--ax-text-sm);
   background:var(--ax-fill-hover);border:1px solid var(--ax-border);color:var(--ax-text-strong);
-  border-radius:var(--ax-radius-md);padding:18px var(--ax-space-3);cursor:pointer;line-height:1.35}
+  border-radius:var(--ax-radius-md);padding:16px var(--ax-space-3);cursor:pointer;line-height:1.35}
 .ax-choice button small{display:block;font-weight:400;font-size:var(--ax-text-2xs);
-  color:var(--ax-text-subtle);margin-top:3px;font-family:var(--ax-font-mono)}
+  color:var(--ax-text-subtle);font-family:var(--ax-font-mono)}
 .ax-choice button[data-yes]{border-color:rgba(70,179,111,.5)}
 .ax-choice button[data-no]{border-color:rgba(226,106,91,.5)}
+.ax-choice button[data-yes] .ax-ico{color:var(--ax-success-500)}
+.ax-choice button[data-no] .ax-ico{color:var(--ax-danger-500)}
+/* borrar el guardado sí es destructivo: el "sí" no debe leerse como seguro */
+#resetPad button[data-yes]{border-color:rgba(226,106,91,.5)}
+#resetPad button[data-yes] .ax-ico{color:var(--ax-danger-500)}
+#resetPad button[data-no]{border-color:var(--ax-border)}
+#resetPad button[data-no] .ax-ico{color:var(--ax-text-subtle)}
 .ax-sheet__x{width:100%;margin-top:var(--ax-space-2);font:inherit;background:transparent;
   border:1px solid var(--ax-border);color:var(--ax-text-subtle);padding:12px;
   border-radius:var(--ax-radius-md);cursor:pointer;font-size:var(--ax-text-sm)}
@@ -358,18 +419,66 @@ details[open] summary::after{content:"−"}
 
 footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px solid var(--ax-border);
   font-size:var(--ax-text-2xs);color:var(--ax-text-subtle);line-height:1.6}
+/* ══ estado del guardado ══ */
+.ax-save{display:flex;align-items:center;justify-content:space-between;
+  gap:var(--ax-space-3);margin-bottom:var(--ax-space-3)}
+.ax-save span{font-family:var(--ax-font-mono);font-size:var(--ax-text-2xs);
+  color:var(--ax-text-subtle);font-variant-numeric:tabular-nums}
+.ax-save span.is-warn{color:var(--ax-warning-500)}
+.ax-save>span{display:inline-flex;align-items:center;gap:6px}
+.ax-save .ax-ico{width:14px;height:14px}
+.ax-legal{border-bottom:0}
+.ax-legal summary{font-size:var(--ax-text-2xs);font-weight:var(--ax-weight-medium);
+  color:var(--ax-text-subtle);padding:var(--ax-space-2) 0}
+.ax-legal p{margin-bottom:var(--ax-space-3)}
+.ax-hint{display:flex;align-items:flex-start;gap:7px}
+.ax-hint .ax-ico{flex:none;margin-top:1px}
 @media (max-width:400px){.ax-switches{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{
   animation-duration:.001ms!important;transition-duration:.001ms!important}}
 </style>
 </head>
 <body>
+<!-- ══ iconos: un solo sprite, se referencia con <use href="#i-…"> ══ -->
+<svg class="ax-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-furia" viewBox="0 0 24 24"><path d="M12.4 2.3c.4 2.6 1.9 4 3.2 5.4A7.2 7.2 0 0 1 17.8 13a5.8 5.8 0 0 1-11.6 0c0-1.7.6-3.2 1.6-4.4.3.9.9 1.6 1.7 2-.4-3 .7-6 2.9-8.3z"/></symbol>
+  <symbol id="i-espada" viewBox="0 0 24 24"><path d="M20.5 3.5 12.8 12.8 11.2 11.2Z"/><path d="M11.4 12.6 7.5 16.5"/><path d="M8.8 10.1 13 14.3"/><path d="M6.2 15.2 8.8 17.8"/></symbol>
+  <symbol id="i-espadas" viewBox="0 0 24 24"><path d="M20.5 3.5 12.8 12.8 11.2 11.2Z"/><path d="M3.5 3.5 11.2 12.8 12.8 11.2Z"/><path d="M11.4 12.6 7.5 16.5"/><path d="M6.2 15.2 8.8 17.8"/><path d="M12.6 12.6 16.5 16.5"/><path d="M15.2 17.8 17.8 15.2"/></symbol>
+  <symbol id="i-pesada" viewBox="0 0 24 24"><path d="M4 9.5v5M7 6.5v11M17 6.5v11M20 9.5v5M7 12h10"/></symbol>
+  <symbol id="i-ventaja" viewBox="0 0 24 24"><path d="m5.5 13.5 6.5-6.5 6.5 6.5"/><path d="m5.5 18.5 6.5-6.5 6.5 6.5"/></symbol>
+  <symbol id="i-desventaja" viewBox="0 0 24 24"><path d="m5.5 10.5 6.5 6.5 6.5-6.5"/><path d="m5.5 5.5 6.5 6.5 6.5-6.5"/></symbol>
+  <symbol id="i-dado" viewBox="0 0 24 24"><path d="M12 2.5 20.5 7.5v9L12 21.5 3.5 16.5v-9z"/><path d="M12 6.8 16.4 14.4H7.6z"/></symbol>
+  <symbol id="i-replica" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2.5"/><path d="M15.5 6.5V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h.5"/></symbol>
+  <symbol id="i-hacha" viewBox="0 0 24 24"><path d="M12.6 11.4 4.5 19.5"/><path d="M13 11 17.2 3.2A5.2 5.2 0 0 1 20.8 6.8Z"/></symbol>
+  <symbol id="i-craneo" viewBox="0 0 24 24"><path d="M12 3.2a7.3 7.3 0 0 0-7.3 7.3v2.6c0 .9.5 1.7 1.3 2.1l1 .5V19a1.2 1.2 0 0 0 1.2 1.2h7.6A1.2 1.2 0 0 0 17 19v-3.3l1-.5c.8-.4 1.3-1.2 1.3-2.1v-2.6A7.3 7.3 0 0 0 12 3.2z"/><circle cx="9.2" cy="11.2" r="1.7" fill="currentColor" stroke="none"/><circle cx="14.8" cy="11.2" r="1.7" fill="currentColor" stroke="none"/><path d="M12 14.2v1.6M10 20.2v-2.2M14 20.2v-2.2"/></symbol>
+  <symbol id="i-jabalina" viewBox="0 0 24 24"><path d="M20.5 3.5 18.9 9.4 14.6 5.1Z"/><path d="M16.8 7.2 4.5 19.5"/></symbol>
+  <symbol id="i-lanzada" viewBox="0 0 24 24"><path d="M20.5 3.5 18.9 9.4 14.6 5.1Z"/><path d="M16.8 7.2 6.5 17.5"/><path d="M11.5 3.8 8.2 7.1"/><path d="M6.8 4.2 4.2 6.8"/></symbol>
+  <symbol id="i-gota" viewBox="0 0 24 24"><path d="M12 3.3c3.3 3.6 5.8 6.6 5.8 9.6a5.8 5.8 0 0 1-11.6 0c0-3 2.5-6 5.8-9.6z"/></symbol>
+  <symbol id="i-corazon" viewBox="0 0 24 24"><path d="M12 20.3 4.7 13a4.7 4.7 0 1 1 7.3-5.8A4.7 4.7 0 1 1 19.3 13z"/></symbol>
+  <symbol id="i-corazon-mas" viewBox="0 0 24 24"><path d="M12 20.3 4.7 13a4.7 4.7 0 1 1 7.3-5.8A4.7 4.7 0 1 1 19.3 13z"/><path d="M12 10.4v4.4M9.8 12.6h4.4"/></symbol>
+  <symbol id="i-cadena" viewBox="0 0 24 24"><path d="M9.5 14.5 14.5 9.5"/><path d="M13.2 6.6 14.7 5a4 4 0 0 1 5.7 5.7l-1.6 1.5"/><path d="M10.8 17.4 9.3 19a4 4 0 0 1-5.7-5.7l1.6-1.5"/></symbol>
+  <symbol id="i-garra" viewBox="0 0 24 24"><path d="M5.6 4.6c1.4 4 2.2 8.8 2.2 14.4"/><path d="M11 3.6c1.4 4 2.2 8.8 2.2 14.4"/><path d="M16.4 5c1.2 3.6 1.9 7.9 1.9 13"/></symbol>
+  <symbol id="i-corona" viewBox="0 0 24 24"><path d="M4 8.2 7.4 11.4 12 4.8 16.6 11.4 20 8.2 18.4 18H5.6z"/></symbol>
+  <symbol id="i-luna" viewBox="0 0 24 24"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9z"/></symbol>
+  <symbol id="i-refresco" viewBox="0 0 24 24"><path d="M19.9 11.2a8 8 0 1 1-2.3-5.6"/><path d="M21.4 4.6 17.6 5.6 18.6 9.4"/></symbol>
+  <symbol id="i-papelera" viewBox="0 0 24 24"><path d="M4.5 7h15"/><path d="M9.5 7V5.2a1.2 1.2 0 0 1 1.2-1.2h2.6a1.2 1.2 0 0 1 1.2 1.2V7"/><path d="M6.8 7 7.6 19.2a1.2 1.2 0 0 0 1.2 1.1h6.4a1.2 1.2 0 0 0 1.2-1.1L17.2 7"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.6 4.7 4.7L19 7.6"/></symbol>
+  <symbol id="i-equis" viewBox="0 0 24 24"><path d="M6.4 6.4 17.6 17.6M17.6 6.4 6.4 17.6"/></symbol>
+  <symbol id="i-lista" viewBox="0 0 24 24"><path d="M8.5 6.5h11M8.5 12h11M8.5 17.5h11M4.5 6.5h.01M4.5 12h.01M4.5 17.5h.01"/></symbol>
+  <symbol id="i-capas" viewBox="0 0 24 24"><path d="m12 3.2 8.5 4.6-8.5 4.6-8.5-4.6z"/><path d="m3.5 12.4 8.5 4.6 8.5-4.6"/><path d="m3.5 16.6 8.5 4.6 8.5-4.6"/></symbol>
+  <symbol id="i-guardado" viewBox="0 0 24 24"><path d="M5 4.5h11.2L19.5 7.8V19a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V5a.5.5 0 0 1 .5-.5z"/><path d="M8.5 4.5v4.7h6.2V4.5"/><path d="M8 19.5v-5.7h8v5.7"/></symbol>
+  <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M12 3.3 5.2 6v5.4c0 4.2 2.9 7.7 6.8 8.9 3.9-1.2 6.8-4.7 6.8-8.9V6z"/></symbol>
+  <symbol id="i-veto" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M6 6 18 18"/></symbol>
+  <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></symbol>
+  <symbol id="i-aviso" viewBox="0 0 24 24"><path d="M12 3.8 21.3 19.5H2.7z"/><path d="M12 9.5v4.2M12 16.7h.01"/></symbol>
+  <symbol id="i-estrella" viewBox="0 0 24 24"><path d="m12 3.5 2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.9-5.4 2.9 1-6-4.4-4.3 6.1-.9z"/></symbol>
+</svg>
 <div class="ax-ambient" aria-hidden="true"><i></i></div>
 <div class="ax-shell">
 
 <header class="ax-hero">
   <span class="ax-eyebrow">Bárbaro 8 · Tótem · Guerrero 1</span>
-  <h1>Edgar 2</h1>
+  <h1>EDGAR <span>— Clero de Shaviri</span></h1>
   <p>Dracónido purasangre negro · Competencia +4 · FUE 20</p>
   <div class="ax-card ax-hero__panel">
     <div class="ax-portrait">
@@ -386,54 +495,57 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
       <div class="ax-kpi"><b>40</b><span>Vel</span></div>
     </div>
   </div>
+  <div class="ax-attrs" id="atributos"></div>
 </header>
 
 <section class="ax-section">
   <div class="ax-section__head">
-    <span class="ax-eyebrow">Postura</span>
+    <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-espadas"/></svg>Postura</span>
     <span class="ax-eyebrow" id="estado">En calma</span>
   </div>
   <div class="ax-switches">
-    <button class="ax-toggle" id="swFuria" aria-pressed="false">Furia<small>+2 daño · resist. todo salvo psíquico</small></button>
-    <button class="ax-toggle" id="swTemerario" aria-pressed="false">Ataque temerario<small>ventaja · te dan ventaja a ti</small></button>
-    <button class="ax-toggle" id="swGWM" aria-pressed="false">Armas pesadas<small>−5 al ataque / +10 al daño</small></button>
-    <button class="ax-toggle" id="swVent" aria-pressed="false">Ventaja externa<small>flanqueo, aliado, terreno</small></button>
-    <button class="ax-toggle" id="swDesv" aria-pressed="false">Desventaja<small>cegado, cobertura, agarrado</small></button>
-    <button class="ax-toggle" id="swFisico" aria-pressed="false">Dados físicos<small>solo calcula, tú tiras</small></button>
-    <button class="ax-toggle" id="swReplica" aria-pressed="false">Anunciar réplica<small>declarar antes · d100 &lt; 50</small></button>
+    <button class="ax-toggle" id="swFuria" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-furia"/></svg><span><b>Furia</b><small>+2 daño · resiste todo</small></span></button>
+    <button class="ax-toggle" id="swTemerario" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-espadas"/></svg><span><b>Temerario</b><small>ventaja · te la dan a ti</small></span></button>
+    <button class="ax-toggle" id="swGWM" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-pesada"/></svg><span><b>Armas pesadas</b><small>−5 atq · +10 daño</small></span></button>
+    <button class="ax-toggle" id="swVent" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-ventaja"/></svg><span><b>Ventaja</b><small>flanqueo · aliado</small></span></button>
+    <button class="ax-toggle" id="swDesv" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-desventaja"/></svg><span><b>Desventaja</b><small>cegado · cobertura</small></span></button>
+    <button class="ax-toggle" id="swFisico" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-dado"/></svg><span><b>Dados físicos</b><small>tú tiras, yo sumo</small></span></button>
+    <button class="ax-toggle" id="swReplica" aria-pressed="false"><svg class="ax-ico" aria-hidden="true"><use href="#i-replica"/></svg><span><b>Anunciar réplica</b><small>antes · d100 &lt; 50</small></span></button>
   </div>
   <div class="ax-note" id="bandaFuria" hidden>
-    <span>⚔</span>
-    <span><strong>En furia.</strong> Tótem del Oso: resistencia a todo el daño salvo psíquico. Ventaja en pruebas y salvaciones de Fuerza. No puedes lanzar ni concentrarte en conjuros. Termina si tu turno acaba sin atacar ni recibir daño.</span>
+    <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-escudo"/></svg>Resiste todo salvo psíquico</span>
+    <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-ventaja"/></svg>Ventaja en FUE</span>
+    <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-veto"/></svg>Sin conjuros</span>
+    <span><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-reloj"/></svg>Acaba si no atacas ni te dañan</span>
   </div>
 </section>
 
 <section class="ax-section">
-  <div class="ax-section__head"><span class="ax-eyebrow">Arma</span></div>
+  <div class="ax-section__head"><span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-hacha"/></svg>Arma</span></div>
   <div class="ax-weapons" id="armas"></div>
 </section>
 
 <div class="ax-actions">
-  <button class="ax-btn-primary" id="btnAtq1">Ataque 1</button>
-  <button class="ax-btn-primary" id="btnAtq2">Ataque 2</button>
+  <button class="ax-btn-primary" id="btnAtq1"></button>
+  <button class="ax-btn-primary" id="btnAtq2"></button>
 </div>
-<button class="ax-btn-ghost" id="btnFin" style="width:100%;margin-top:8px">Finalizar turno ⟳</button>
+<button class="ax-btn-ghost" id="btnFin" style="width:100%;margin-top:8px"><svg class="ax-ico" aria-hidden="true"><use href="#i-refresco"/></svg>Finalizar turno</button>
 
 <div class="ax-card ax-verdict" id="veredicto">
-  <div class="ax-verdict__empty">Elige un arma y pulsa <strong>Atacar</strong>.<br>Siempre verás el desglose para auditarlo en mesa.</div>
+  <div class="ax-verdict__empty">Elige arma y pulsa <strong>Ataque 1</strong>.</div>
 </div>
 
 <section class="ax-section">
   <div class="ax-section__head">
-    <span class="ax-eyebrow">Reservas</span>
-    <button class="ax-btn-link" id="descansoLargo">Descanso largo ↻</button>
+    <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-capas"/></svg>Reservas</span>
+    <button class="ax-btn-link" id="descansoLargo"><svg class="ax-ico" aria-hidden="true"><use href="#i-luna"/></svg>Descanso largo</button>
   </div>
   <div class="ax-card" id="recursos"></div>
 </section>
 
 <section class="ax-section">
   <div class="ax-section__head">
-    <span class="ax-eyebrow">Vida</span>
+    <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-corazon"/></svg>Vida</span>
     <span class="ax-eyebrow ax-num" id="pgTxt">110 / 110</span>
   </div>
   <div class="ax-card">
@@ -470,15 +582,21 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
 
 <section class="ax-section">
   <div class="ax-section__head">
-    <span class="ax-eyebrow">Registro</span>
-    <button class="ax-btn-link" id="limpiar" style="color:var(--ax-text-subtle)">Borrar</button>
+    <span class="ax-eyebrow"><svg class="ax-ico" aria-hidden="true"><use href="#i-lista"/></svg>Registro</span>
+    <button class="ax-btn-link" id="limpiar" style="color:var(--ax-text-subtle)"><svg class="ax-ico" aria-hidden="true"><use href="#i-papelera"/></svg>Borrar</button>
   </div>
   <div class="ax-log" id="log"><div class="ax-log__line">Sesión iniciada.</div></div>
 </section>
 
 <footer>
-  Los datos se pierden al recargar. Verifica siempre el desglose: la app puede equivocarse, tu DM manda.<br><br>
-  Interfaz basada en el sistema de diseño Vireo (Aurora). Contiene material del System Reference Document 5.1 de Wizards of the Coast LLC, bajo licencia Creative Commons Attribution 4.0. Contenido homebrew y no-SRD introducido manualmente para uso personal.
+  <div class="ax-save">
+    <span id="guardadoTxt"><svg class="ax-ico" aria-hidden="true"><use href="#i-guardado"/></svg>Guardado automático.</span>
+    <button class="ax-btn-link" id="borrarGuardado" style="color:var(--ax-text-subtle)"><svg class="ax-ico" aria-hidden="true"><use href="#i-papelera"/></svg>Empezar de cero</button>
+  </div>
+  Se guarda en este navegador y sobrevive a recargas. Verifica el desglose: la app puede equivocarse, tu DM manda.
+  <details class="ax-legal"><summary>Créditos y licencia</summary>
+    <p>Interfaz basada en el sistema de diseño Vireo (Aurora). Contiene material del System Reference Document 5.1 de Wizards of the Coast LLC, bajo licencia Creative Commons Attribution 4.0. Contenido homebrew y no-SRD introducido manualmente para uso personal.</p>
+  </details>
 </footer>
 </div>
 
@@ -487,17 +605,17 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
     <h3 id="dadoTit">Ataque</h3>
     <p id="dadoHint">Pulsa el resultado de tu d20.</p>
     <div class="ax-dice" id="dadoGrid"></div>
-    <button class="ax-sheet__x" data-cara="x">Cancelar</button>
+    <button class="ax-sheet__x" data-cara="x"><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-equis"/></svg> Cancelar</button>
   </div>
 </div>
 
 <div class="ax-overlay" id="redoPad" hidden>
   <div class="ax-sheet">
     <h3 id="redoTit">¿Repetir el ataque?</h3>
-    <p>Ya resolviste este ataque. Si lo repites, el resultado anterior se descarta y no contará en el resumen del turno.</p>
+    <p>El resultado anterior se descarta y no contará en el resumen del turno.</p>
     <div class="ax-choice">
-      <button data-redo="1" data-yes>Sí, repetir<small>descarta el anterior</small></button>
-      <button data-redo="0" data-no>No, dejarlo<small>mantener resultado</small></button>
+      <button data-redo="1" data-yes><svg class="ax-ico" aria-hidden="true"><use href="#i-refresco"/></svg>Sí, repetir<small>descarta el anterior</small></button>
+      <button data-redo="0" data-no><svg class="ax-ico" aria-hidden="true"><use href="#i-equis"/></svg>No, dejarlo<small>mantener resultado</small></button>
     </div>
   </div>
 </div>
@@ -507,10 +625,10 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
     <h3>¿Ataque temerario?</h3>
     <p id="temTxt">Fallaste. Puedes atacar temerariamente para tirar el segundo d20 de la ventaja.</p>
     <div class="ax-choice">
-      <button data-tem="1" data-yes>Sí, temerario<small>2º d20</small></button>
-      <button data-tem="0" data-no>No, dejarlo<small>el fallo queda</small></button>
+      <button data-tem="1" data-yes><svg class="ax-ico" aria-hidden="true"><use href="#i-espadas"/></svg>Sí, temerario<small>2º d20</small></button>
+      <button data-tem="0" data-no><svg class="ax-ico" aria-hidden="true"><use href="#i-equis"/></svg>No, dejarlo<small>el fallo queda</small></button>
     </div>
-    <p class="ax-sheet__foot">⚠ Por reglas se declara antes de tirar el primer ataque del turno. Consulta con tu DM. Hasta tu siguiente turno los enemigos tendrán ventaja contra ti.</p>
+    <p class="ax-sheet__foot"><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-aviso"/></svg> Por reglas se declara antes de tirar. Hasta tu próximo turno te atacan con ventaja.</p>
   </div>
 </div>
 
@@ -519,8 +637,19 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
     <h3>¿Impactó?</h3>
     <p id="caTxt">Tu total contra la CA</p>
     <div class="ax-choice">
-      <button data-hit="1" data-yes>Sí, impacta<small>tira el daño</small></button>
-      <button data-hit="0" data-no>No, falla<small>sin daño</small></button>
+      <button data-hit="1" data-yes><svg class="ax-ico" aria-hidden="true"><use href="#i-check"/></svg>Sí, impacta<small>tira el daño</small></button>
+      <button data-hit="0" data-no><svg class="ax-ico" aria-hidden="true"><use href="#i-equis"/></svg>No, falla<small>sin daño</small></button>
+    </div>
+  </div>
+</div>
+
+<div class="ax-overlay" id="resetPad" hidden>
+  <div class="ax-sheet">
+    <h3>¿Empezar de cero?</h3>
+    <p>PG al máximo, reservas llenas, turno 1 y registro vacío. No se puede deshacer.</p>
+    <div class="ax-choice">
+      <button data-reset="1" data-yes><svg class="ax-ico" aria-hidden="true"><use href="#i-papelera"/></svg>Sí, borrar<small>vuelve al inicio</small></button>
+      <button data-reset="0" data-no><svg class="ax-ico" aria-hidden="true"><use href="#i-equis"/></svg>Cancelar<small>mantener todo</small></button>
     </div>
   </div>
 </div>
@@ -530,8 +659,8 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
     <h3>Daño de réplica</h3>
     <p>Tira tu d100. ¿Sacaste menos de 50?</p>
     <div class="ax-choice">
-      <button data-rep="1" data-yes>Sí, pasó<small>&lt; 50</small></button>
-      <button data-rep="0" data-no>No, falló<small>≥ 50</small></button>
+      <button data-rep="1" data-yes><svg class="ax-ico" aria-hidden="true"><use href="#i-check"/></svg>Sí, pasó<small>&lt; 50</small></button>
+      <button data-rep="0" data-no><svg class="ax-ico" aria-hidden="true"><use href="#i-equis"/></svg>No, falló<small>≥ 50</small></button>
     </div>
   </div>
 </div>
@@ -552,10 +681,12 @@ const PJ = {
   //   "dado"   → extra = doble de los dados    (29 → 53)
   //   "triple" → extra = doble del daño total  (29 → 87)
   replicaModo: "x2",
+  // salvaciones con ventaja: resaltan en la cabecera. El texto es el porqué.
+  ventajaSalva: {FUE:"En furia", DES:"Sentido del peligro", CON:"Ventaja"},
   salvas: [
     {n:"Fuerza", b:9, nota:"Ventaja en furia"},
-    {n:"Destreza", b:2, nota:"Ventaja vs efectos visibles"},
-    {n:"Constitución", b:7, nota:""},
+    {n:"Destreza", b:2, nota:"Ventaja · sentido del peligro"},
+    {n:"Constitución", b:7, nota:"Ventaja"},
     {n:"Inteligencia", b:1, nota:""},
     {n:"Sabiduría", b:1, nota:""},
     {n:"Carisma", b:1, nota:""}
@@ -571,27 +702,27 @@ const PJ = {
     {n:"Sigilo / Acrobacias", b:2, nota:""}
   ],
   armas: [
-    {id:"hacha", nombre:"Hacha de Golpe", dados:[1,12], tipo:"cortante",
+    {id:"hacha", nombre:"Hacha de Golpe", ico:"hacha", dados:[1,12], tipo:"cortante",
      cac:true, fue:true, pesada:true, magico:0},
-    {id:"brazo", nombre:"Brazo de la Muerte", dados:[1,12], tipo:"necrótico",
+    {id:"brazo", nombre:"Brazo de la Muerte", ico:"craneo", dados:[1,12], tipo:"necrótico",
      cac:true, fue:true, pesada:true, magico:3},
-    {id:"replica", nombre:"Hacha réplica", dados:[1,12], tipo:"cortante",
+    {id:"replica", nombre:"Hacha réplica", ico:"replica", dados:[1,12], tipo:"cortante",
      cac:true, fue:true, pesada:true, magico:0, replica:true,
      aviso:"Homebrew: dados asumidos 1d12. Ajusta si tu DM usa otros."},
-    {id:"jabalina", nombre:"Jabalina", dados:[1,6], tipo:"perforante",
+    {id:"jabalina", nombre:"Jabalina", ico:"jabalina", dados:[1,6], tipo:"perforante",
      cac:true, fue:true, pesada:false, magico:0},
-    {id:"jabalinaL", nombre:"Jabalina lanzada", dados:[1,6], tipo:"perforante",
+    {id:"jabalinaL", nombre:"Jabalina lanzada", ico:"lanzada", dados:[1,6], tipo:"perforante",
      cac:false, fue:true, pesada:false, magico:0,
      aviso:"Ataque a distancia: la furia NO suma su daño."}
   ],
   recursos: [
-    {id:"furias", n:"Furias", s:"Descanso largo", max:4},
-    {id:"aliento", n:"Aliento de ácido", s:"3d6 · CD 15 · corto", max:1},
-    {id:"segundo", n:"Tomar aliento", s:"1d10+1 PG · corto", max:1},
-    {id:"rep", n:"Daño de réplica", s:"Anunciar + d100 < 50", max:2},
-    {id:"binds", n:"Binds", s:"Impacta automáticamente", max:2},
-    {id:"rend", n:"Rend", s:"Sin límite de usos", max:0},
-    {id:"presencia", n:"Presencia imponente", s:"Ventaja social · corto", max:1}
+    {id:"furias", n:"Furias", s:"Descanso largo", ico:"furia", max:4},
+    {id:"aliento", n:"Aliento de ácido", s:"3d6 · CD 15 · corto", ico:"gota", max:1},
+    {id:"segundo", n:"Tomar aliento", s:"1d10+1 PG · corto", ico:"corazon-mas", max:1},
+    {id:"rep", n:"Daño de réplica", s:"d100 < 50 · anunciar", ico:"replica", max:2},
+    {id:"binds", n:"Binds", s:"Impacto automático", ico:"cadena", max:2},
+    {id:"rend", n:"Rend", s:"Sin límite", ico:"garra", max:0},
+    {id:"presencia", n:"Presencia imponente", s:"Ventaja social · corto", ico:"corona", max:1}
   ]
 };
 
@@ -606,6 +737,8 @@ const S = {
 };
 const $ = s => document.querySelector(s);
 const d = n => 1 + Math.floor(Math.random()*n);
+// icono del sprite; decorativo, el texto de al lado es el que anuncian los lectores
+const ico = (n, cls="") => `<svg class="ax-ico ${cls}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 
 /* ═══════════════════════════════════════════
    3. MOTOR DE CÁLCULO
@@ -676,7 +809,7 @@ async function resolverAtaque(etiqueta, forzado, idx){
     if(arma.magico) mods.push(`+${arma.magico} mágico`);
     if(ctx.gwmAplica) mods.push(`−5 GWM`);
     return `<div class="ax-roll">
-      <div class="ax-roll__label">${etiqueta} · ${arma.nombre}</div>
+      <div class="ax-roll__label">${ico(arma.ico,"ax-ico--sm")} ${etiqueta} · ${arma.nombre}</div>
       <div><span class="ax-roll__value ${crit?'is-crit':''}${pifia?'is-fumble':''}">${pifia?'PIFIA':total}</span>${!pifia?'<span class="ax-roll__vs">vs CA</span>':''}</div>
       <div class="ax-math">1d20 ${textoD20} ${mods.join(" ")} ${!pifia?`= <span class="keep">${total}</span>`:''}</div>`;
   };
@@ -706,9 +839,9 @@ async function resolverAtaque(etiqueta, forzado, idx){
 
     let html = cabecera();
     if(!impacta){
-      S.acciones.push({idx, et:etiqueta, arma:arma.nombre, total, res:"falla", dano:0});
+      S.acciones.push({idx, et:etiqueta, arma:arma.nombre, ico:arma.ico, total, res:"falla", dano:0});
       log(`${etiqueta} ${arma.nombre}: ${total} — falla`);
-      return html + `<div class="ax-hint ax-hint--miss">Falla contra la CA. Sin daño.</div></div>`;
+      return html + `<div class="ax-hint ax-hint--miss">${ico("equis","ax-ico--sm")}Falla contra la CA. Sin daño.</div></div>`;
     }
     const dmg = await tirarDano(arma, ctx, crit);
     if(dmg === null){
@@ -740,26 +873,26 @@ async function resolverAtaque(etiqueta, forzado, idx){
           explica = `el golpe hace el doble (${dmg.total} × 2)`;
         }
         danoFinal = dmg.total + bonus;
-        extra = `<div class="ax-hint">Réplica: ${etq} → ${explica}.<br>
-          Daño final <strong>${danoFinal}</strong>. ${quedan}</div>`;
+        extra = `<div class="ax-hint">${ico("replica","ax-ico--sm")}<span>Réplica: ${etq} → ${explica}.<br>
+          Daño final <strong>${danoFinal}</strong>. ${quedan}</span></div>`;
       } else {
-        extra = `<div class="ax-hint">Réplica: ${etq} → sin daño adicional, uso gastado. ${quedan}</div>`;
+        extra = `<div class="ax-hint">${ico("replica","ax-ico--sm")}<span>Réplica: ${etq} → sin daño adicional, uso gastado. ${quedan}</span></div>`;
       }
     } else if(arma.replica && S.replica){
-      extra = `<div class="ax-hint">Sin usos de réplica hasta el próximo descanso largo.</div>`;
+      extra = `<div class="ax-hint">${ico("replica","ax-ico--sm")}<span>Sin usos de réplica hasta el próximo descanso largo.</span></div>`;
     }
     html += `<div class="ax-dmg">
       <span class="ax-dmg__n">${danoFinal}</span><span class="ax-dmg__t">${arma.tipo}${crit?' · crítico':''}</span>
       <div class="ax-math">${dmg.desglose}</div>${extra}
-      ${crit?'<div class="ax-hint">Crítico: puedes usar tu acción adicional para un ataque extra (Maestro en armas pesadas).</div>':''}
-      ${arma.aviso?`<div class="ax-hint ax-hint--warn">⚠ ${arma.aviso}</div>`:''}
+      ${crit?`<div class="ax-hint">${ico("estrella","ax-ico--sm")}<span>Crítico: acción adicional para un ataque extra (Maestro en armas pesadas).</span></div>`:''}
+      ${arma.aviso?`<div class="ax-hint ax-hint--warn">${ico("aviso","ax-ico--sm")}<span>${arma.aviso}</span></div>`:''}
     </div>`;
-    S.acciones.push({idx, et:etiqueta, arma:arma.nombre, total, res:crit?"crítico":"impacta", dano:danoFinal, tipo:arma.tipo});
+    S.acciones.push({idx, et:etiqueta, arma:arma.nombre, ico:arma.ico, total, res:crit?"crítico":"impacta", dano:danoFinal, tipo:arma.tipo});
     log(`${etiqueta} ${arma.nombre}: ${total} vs CA · ${danoFinal} ${arma.tipo}${crit?' (CRIT)':''}`);
     return html + `</div>`;
   }
 
-  S.acciones.push({idx, et:etiqueta, arma:arma.nombre, total:1, res:"pifia", dano:0});
+  S.acciones.push({idx, et:etiqueta, arma:arma.nombre, ico:arma.ico, total:1, res:"pifia", dano:0});
   log(`${etiqueta} ${arma.nombre}: pifia (1 natural)`);
   return cabecera() + `</div>`;
 }
@@ -817,12 +950,13 @@ function preguntarRepetir(n){
 
 function pintarVeredicto(){
   const html = [S.slots[1], S.slots[2]].filter(Boolean).join("");
-  $("#veredicto").innerHTML = html || `<div class="ax-verdict__empty">Turno ${S.turnoNum}. Elige un arma y pulsa <strong>Ataque 1</strong>.</div>`;
+  $("#veredicto").innerHTML = html || `<div class="ax-verdict__empty">Turno ${S.turnoNum} · elige arma y pulsa <strong>Ataque 1</strong>.</div>`;
   [1,2].forEach(n=>{
     const b = $("#btnAtq"+n), usado = !!S.slots[n];
     b.classList.toggle("is-used", usado);
-    b.textContent = usado ? `Ataque ${n} ✓` : `Ataque ${n}`;
+    b.innerHTML = ico(usado ? "check" : "espada") + `Ataque ${n}`;
   });
+  guardar();
 }
 
 async function atacar(n){
@@ -851,6 +985,7 @@ function log(txt){
   el.className = "ax-log__line";
   el.textContent = txt;
   $("#log").prepend(el);
+  guardar();
 }
 
 function finalizarTurno(){
@@ -862,7 +997,9 @@ function finalizarTurno(){
     const der = a.res==="pifia" ? "pifia"
               : a.res==="falla" ? `${a.total} · falla`
               : `${a.total} → ${a.dano} ${a.tipo||""}`;
-    return `<li class="${cls}"><span>${a.et} · ${a.arma}${a.res==="crítico"?" ★":""}</span><b>${der}</b></li>`;
+    const marca = a.res==="crítico" ? ico("estrella","ax-ico--sm")
+                : a.dano===0 ? ico("equis","ax-ico--sm") : ico("check","ax-ico--sm");
+    return `<li class="${cls}"><span>${a.ico?ico(a.ico,"ax-ico--sm"):""}${a.et} · ${a.arma}${marca}</span><b>${der}</b></li>`;
   }).join("") : `<li><span>Sin ataques este turno</span><b>—</b></li>`;
 
   const previos = [];
@@ -877,8 +1014,8 @@ function finalizarTurno(){
     <h4>Turno ${S.turnoNum}<span>${impactos}/${acc.length||0} impactos</span></h4>
     <ul>${filas}</ul>
     <div class="ax-tcard__total"><span class="ax-eyebrow">Daño total</span><b>${total}</b></div>
-    ${previos.length ? `<div class="ax-tcard__reset">Se apaga: ${previos.join(" · ")}.${S.furia?" La furia sigue activa.":""}</div>`
-                     : (S.furia?`<div class="ax-tcard__reset">La furia sigue activa.</div>`:"")}`;
+    ${previos.length ? `<div class="ax-tcard__reset">${ico("refresco","ax-ico--sm")}<span>Se apaga: ${previos.join(" · ")}.${S.furia?" La furia sigue activa.":""}</span></div>`
+                     : (S.furia?`<div class="ax-tcard__reset">${ico("furia","ax-ico--sm")}<span>La furia sigue activa.</span></div>`:"")}`;
   $("#log").prepend(card);
 
   S.acciones = []; S.slots = {}; S.turnoNum++;
@@ -893,7 +1030,7 @@ function pintarArmas(){
     const ctx = contexto(a);
     const [n,c] = a.dados;
     return `<button class="ax-weapon" data-arma="${a.id}" aria-pressed="${S.arma===a.id}">
-      <span><span class="ax-weapon__name">${a.nombre}</span>${a.aviso?'<span class="ax-badge">revisar</span>':''}</span>
+      <span class="ax-weapon__id">${ico(a.ico)}<span><span class="ax-weapon__name">${a.nombre}</span>${a.aviso?'<span class="ax-badge">revisar</span>':''}</span></span>
       <span class="ax-weapon__stats">+${ctx.bonoAtaque} · ${n}d${c}+${ctx.bonoDano}</span>
     </button>`;
   }).join("");
@@ -904,11 +1041,12 @@ function pintarArmas(){
 
 function pintarRecursos(){
   $("#recursos").innerHTML = PJ.recursos.map(r=>{
+    const nombre = `<span class="ax-res__n">${ico(r.ico)}<span>${r.n}<small>${r.s}</small></span></span>`;
     if(r.max === 0)
-      return `<div class="ax-res"><span class="ax-res__n">${r.n}<small>${r.s}</small></span><span class="ax-inf">∞</span></div>`;
+      return `<div class="ax-res">${nombre}<span class="ax-inf">∞</span></div>`;
     const pips = Array.from({length:r.max},(_,i)=>
       `<button class="ax-pip ${i < S.usos[r.id] ? 'is-on':''}" data-r="${r.id}" data-i="${i}" aria-label="${r.n} ${i+1}"></button>`).join("");
-    return `<div class="ax-res"><span class="ax-res__n">${r.n}<small>${r.s}</small></span><span class="ax-pips">${pips}</span></div>`;
+    return `<div class="ax-res">${nombre}<span class="ax-pips">${pips}</span></div>`;
   }).join("");
   $("#recursos").querySelectorAll(".ax-pip").forEach(p=>{
     p.onclick = ()=>{
@@ -917,18 +1055,32 @@ function pintarRecursos(){
       pintarRecursos();
     };
   });
+  guardar();
+}
+
+const ATRIBUTOS = {FUE:"Fuerza", DES:"Destreza", CON:"Constitución",
+                   INT:"Inteligencia", SAB:"Sabiduría", CAR:"Carisma"};
+
+function pintarAtributos(){
+  $("#atributos").innerHTML = Object.keys(ATRIBUTOS).map(k=>{
+    const m = PJ.mods[k], v = PJ.ventajaSalva[k];
+    const titulo = ATRIBUTOS[k] + (v ? ` · ventaja en salvaciones (${v})` : "");
+    return `<div class="ax-attr ${v?"is-adv":""}" title="${titulo}" aria-label="${titulo}: ${m>=0?"+":""}${m}">
+      <b>${m>=0?"+":""}${m}</b><span>${k}</span>${v?ico("ventaja"):""}</div>`;
+  }).join("");
 }
 
 function pintarListas(){
-  const fila = x => `<div class="ax-row"><span>${x.n}${x.nota?`<em>${x.nota}</em>`:''}</span><button data-b="${x.b}" data-n="${x.n}">+${x.b}</button></div>`;
+  const fila = x => `<div class="ax-row"><span>${x.n}${x.nota?`<em>${x.nota}</em>`:''}</span>
+    <button data-b="${x.b}" data-n="${x.n}">${ico("dado","ax-ico--sm")}+${x.b}</button></div>`;
   $("#salvas").innerHTML = PJ.salvas.map(fila).join("");
   $("#habs").innerHTML = PJ.habs.map(fila).join("");
   document.querySelectorAll(".ax-row button").forEach(b=>{
     b.onclick = ()=>{
       const r = d(20), t = r + (+b.dataset.b);
-      b.textContent = t;
+      b.innerHTML = ico("dado","ax-ico--sm") + t;
       log(`${b.dataset.n}: d20 [${r}] +${b.dataset.b} = ${t}`);
-      setTimeout(()=>{ b.textContent = "+" + b.dataset.b; }, 4000);
+      setTimeout(()=>{ b.innerHTML = ico("dado","ax-ico--sm") + "+" + b.dataset.b; }, 4000);
     };
   });
 }
@@ -972,6 +1124,7 @@ function pintarEstado(){
   pintarRetrato();
   $("#swReplica").disabled = !armaActual().replica;
   pintarArmas();
+  guardar();
 }
 
 function pintarPG(){
@@ -980,8 +1133,131 @@ function pintarPG(){
   $("#tPG").textContent = S.pg;
   $("#pgTxt").textContent = `${S.pg} / ${PJ.pgMax}`;
   $("#pgBar").style.width = Math.min(100, S.pg/PJ.pgMax*100) + "%";
+  guardar();
 }
 
+/* ═══════════════════════════════════════════
+   6. PERSISTENCIA — todo vive en localStorage
+   Se guarda solo, con retardo, tras cualquier cambio de estado.
+   ═══════════════════════════════════════════ */
+const CLAVE   = "edgar2.estado.v1";
+const LOG_MAX = 80;   // entradas del registro que se conservan
+const BANDERAS = ["furia","temerario","gwm","ventaja","desventaja","fisico","replica"];
+const INTERRUPTORES = {
+  "#swFuria":"furia", "#swTemerario":"temerario", "#swGWM":"gwm", "#swVent":"ventaja",
+  "#swDesv":"desventaja", "#swFisico":"fisico", "#swReplica":"replica"
+};
+
+// en navegación privada o con almacenamiento bloqueado, localStorage lanza al escribir
+const almacen = (()=>{
+  try{
+    const a = window.localStorage;
+    a.setItem(CLAVE+".probar","1"); a.removeItem(CLAVE+".probar");
+    return a;
+  }catch(e){ return null; }
+})();
+
+let avisoHasta = 0;   // mientras dure, no pisar el mensaje de restauración
+function marcarGuardado(txt, alerta, fijar){
+  const el = $("#guardadoTxt");
+  if(!el) return;
+  if(!fijar && Date.now() < avisoHasta) return;
+  if(fijar) avisoHasta = Date.now() + 8000;
+  el.innerHTML = ico(alerta ? "aviso" : "guardado") + txt;
+  el.classList.toggle("is-warn", !!alerta);
+}
+const hora = t => new Date(t).toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"});
+
+function podarLog(){
+  const el = $("#log");
+  while(el.children.length > LOG_MAX) el.removeChild(el.lastElementChild);
+}
+
+let pendiente = 0, inhabilitado = false;
+function guardar(){                      // agrupa ráfagas de cambios en una escritura
+  if(!almacen || inhabilitado) return;
+  clearTimeout(pendiente);
+  pendiente = setTimeout(guardarYa, 300);
+}
+function guardarYa(){
+  if(!almacen || inhabilitado) return;
+  clearTimeout(pendiente);
+  podarLog();
+  const ts = Date.now();
+  const paquete = {
+    v:1, ts,
+    s:{
+      arma:S.arma, pg:S.pg, turnoNum:S.turnoNum,
+      usos:S.usos, acciones:S.acciones, slots:S.slots,
+      ...Object.fromEntries(BANDERAS.map(k=>[k, S[k]]))
+    },
+    log: $("#log").innerHTML
+  };
+  try{
+    almacen.setItem(CLAVE, JSON.stringify(paquete));
+    marcarGuardado(`Guardado ${hora(ts)}`);
+  }catch(e){
+    // cuota llena: reintenta sin el registro, que es lo único voluminoso
+    try{
+      paquete.log = "";
+      almacen.setItem(CLAVE, JSON.stringify(paquete));
+      marcarGuardado(`Guardado ${hora(ts)} · registro no cabe`, true);
+    }catch(e2){
+      marcarGuardado("No se pudo guardar: almacenamiento lleno.", true, true);
+    }
+  }
+}
+
+function restaurar(){
+  if(!almacen){
+    marcarGuardado("Sin guardado: este navegador lo bloquea.", true, true);
+    return;
+  }
+  let g;
+  try{ g = JSON.parse(almacen.getItem(CLAVE)); }catch(e){ return; }
+  if(!g || g.v !== 1 || !g.s) return;
+  const s = g.s;
+
+  BANDERAS.forEach(k=>{ if(typeof s[k] === "boolean") S[k] = s[k]; });
+  if(PJ.armas.some(a=>a.id === s.arma)) S.arma = s.arma;          // el arma pudo desaparecer
+  if(!armaActual().replica) S.replica = false;
+  if(Number.isFinite(s.pg)) S.pg = Math.max(0, Math.min(PJ.pgMax*2, s.pg));
+  if(Number.isFinite(s.turnoNum) && s.turnoNum >= 1) S.turnoNum = Math.floor(s.turnoNum);
+
+  // parte de los máximos actuales: si subes de nivel y cambian, nada se rompe
+  PJ.recursos.forEach(r=>{
+    const v = s.usos && s.usos[r.id];
+    if(Number.isFinite(v)) S.usos[r.id] = Math.max(0, Math.min(r.max, v));
+  });
+
+  if(Array.isArray(s.acciones)) S.acciones = s.acciones;          // turno a medias
+  if(s.slots) [1,2].forEach(n=>{ if(typeof s.slots[n] === "string") S.slots[n] = s.slots[n]; });
+  if(typeof g.log === "string" && g.log) $("#log").innerHTML = g.log;
+
+  const mismoDia = new Date(g.ts).toDateString() === new Date().toDateString();
+  marcarGuardado(`Restaurado · guardado ${hora(g.ts)}${mismoDia?"":" de "+new Date(g.ts).toLocaleDateString("es-ES")}`, false, true);
+}
+
+function sincronizarInterruptores(){
+  Object.entries(INTERRUPTORES).forEach(([sel,k])=> $(sel).setAttribute("aria-pressed", S[k]));
+}
+
+function borrarGuardado(){
+  inhabilitado = true;                // el volcado de pagehide lo reescribiría al recargar
+  clearTimeout(pendiente);
+  try{ if(almacen) almacen.removeItem(CLAVE); }catch(e){}
+  location.reload();
+}
+
+// el móvil puede matar la pestaña sin previo aviso: vuelca lo pendiente al ocultarse
+window.addEventListener("pagehide", guardarYa);
+document.addEventListener("visibilitychange", ()=>{
+  if(document.visibilityState === "hidden") guardarYa();
+});
+
+/* ═══════════════════════════════════════════
+   7. CABLEADO
+   ═══════════════════════════════════════════ */
 function toggle(sel, clave){
   const b = $(sel);
   b.onclick = ()=>{
@@ -1000,7 +1276,8 @@ toggle("#swReplica","replica");
 $("#btnAtq1").onclick = ()=>atacar(1);
 $("#btnAtq2").onclick = ()=>atacar(2);
 $("#btnFin").onclick    = finalizarTurno;
-$("#limpiar").onclick   = ()=>{ $("#log").innerHTML = ""; };
+$("#limpiar").onclick   = ()=>{ $("#log").innerHTML = ""; guardar(); };
+$("#borrarGuardado").onclick = async ()=>{ if(await hoja("#resetPad","reset")) borrarGuardado(); };
 $("#descansoLargo").onclick = ()=>{
   PJ.recursos.forEach(r=> S.usos[r.id] = r.max);
   S.pg = PJ.pgMax; S.furia = false;
@@ -1012,7 +1289,9 @@ document.querySelectorAll(".ax-hp button").forEach(b=>{
 });
 $("#pgIn").onchange = e => { S.pg = +e.target.value || 0; pintarPG(); };
 $("#tCA").textContent = PJ.ca;
-pintarRecursos(); pintarListas(); pintarPG(); pintarEstado(); pintarVeredicto();
+restaurar();                  // lee el guardado antes del primer pintado
+sincronizarInterruptores();
+pintarAtributos(); pintarRecursos(); pintarListas(); pintarPG(); pintarEstado(); pintarVeredicto();
 </script>
 </body>
 </html>
