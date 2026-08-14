@@ -318,6 +318,20 @@ body{
   0%,100%{filter:brightness(1);transform:scale(1)}
   50%{filter:brightness(1.45);transform:scale(1.035)}
 }
+/* ══ vida al 10% o menos: a Edgar le tiembla el pulso ══ */
+@keyframes ax-temblor{
+  0%,100%{transform:translate3d(0,0,0)}
+  20%{transform:translate3d(-1.2px,.6px,0) rotate(-.35deg)}
+  40%{transform:translate3d(1.2px,-.6px,0) rotate(.35deg)}
+  60%{transform:translate3d(-.9px,-.4px,0) rotate(-.25deg)}
+  80%{transform:translate3d(.9px,.4px,0) rotate(.25deg)}
+}
+body.is-critico button{animation:ax-temblor .34s ease-in-out infinite}
+/* los dos que ya latían siguen latiendo: el temblor mueve, el latido ilumina */
+body.is-critico .ax-btn-primary.is-listo{
+  animation:ax-temblor .34s ease-in-out infinite, ax-latido-btn 1.4s var(--ax-ease-standard) infinite}
+body.is-critico .ax-toggle--accion.is-alerta{
+  animation:ax-temblor .34s ease-in-out infinite, ax-latido 1.5s var(--ax-ease-standard) infinite}
 /* mientras el extra ya está disponible, sobra ofrecerlo otra vez */
 [data-extra="si"] .ax-caida{display:none}
 .ax-caida{font:inherit;cursor:pointer;margin-top:var(--ax-space-3);
@@ -1583,6 +1597,8 @@ function pintarPG(){
   $("#tPG").textContent = S.pg;
   $("#pgTxt").textContent = `${S.pg} / ${PJ.pgMax}`;
   $("#pgBar").style.width = Math.min(100, S.pg/PJ.pgMax*100) + "%";
+  // al 10% de vida o menos tiemblan todos los botones
+  document.body.classList.toggle("is-critico", S.pg <= PJ.pgMax * 0.10);
   pintarLanzar();
   guardar();
 }
