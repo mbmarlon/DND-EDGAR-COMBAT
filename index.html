@@ -504,10 +504,10 @@ details[open] summary::after{content:"−"}
 .ax-choice button[data-yes] .ax-ico{color:var(--ax-success-500)}
 .ax-choice button[data-no] .ax-ico{color:var(--ax-danger-500)}
 /* borrar el guardado sí es destructivo: el "sí" no debe leerse como seguro */
-#resetPad button[data-yes]{border-color:rgba(226,106,91,.5)}
-#resetPad button[data-yes] .ax-ico{color:var(--ax-danger-500)}
-#resetPad button[data-no]{border-color:var(--ax-border)}
-#resetPad button[data-no] .ax-ico{color:var(--ax-text-subtle)}
+#resetPad button[data-yes],#impPad button[data-yes]{border-color:rgba(226,106,91,.5)}
+#resetPad button[data-yes] .ax-ico,#impPad button[data-yes] .ax-ico{color:var(--ax-danger-500)}
+#resetPad button[data-no],#impPad button[data-no]{border-color:var(--ax-border)}
+#resetPad button[data-no] .ax-ico,#impPad button[data-no] .ax-ico{color:var(--ax-text-subtle)}
 .ax-sheet__x{width:100%;margin-top:var(--ax-space-2);font:inherit;background:transparent;
   border:1px solid var(--ax-border);color:var(--ax-text-subtle);padding:12px;
   border-radius:var(--ax-radius-md);cursor:pointer;font-size:var(--ax-text-sm)}
@@ -524,7 +524,9 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
 .ax-save span{font-family:var(--ax-font-mono);font-size:var(--ax-text-2xs);
   color:var(--ax-text-subtle);font-variant-numeric:tabular-nums}
 .ax-save span.is-warn{color:var(--ax-warning-500)}
+.ax-save{flex-wrap:wrap}
 .ax-save>span{display:inline-flex;align-items:center;gap:6px}
+.ax-save__acc{display:flex;flex-wrap:wrap;gap:var(--ax-space-3)}
 .ax-save .ax-ico{width:14px;height:14px}
 .ax-legal{border-bottom:0}
 .ax-legal summary{font-size:var(--ax-text-2xs);font-weight:var(--ax-weight-medium);
@@ -572,6 +574,8 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
   <symbol id="i-reloj" viewBox="0 0 512 512" fill="currentColor" stroke="none"><rect x="128.729" y="29.516" width="254.542" height="29.092" rx="5.884"/><rect x="128.729" y="453.392" width="254.542" height="29.092" rx="5.884"/><path d="M281.228,247.026c76.035-26.554,90.12-107.451,89.679-157.231A11.3,11.3,0,0,0,359.6,78.458H152.4A11.3,11.3,0,0,0,141.092,89.8c.194,45.857,11.19,128.82,84.924,154.336,8.743,2.739,11.482,14.579,4.756,20.841-76.036,26.555-90.119,107.451-89.679,157.231A11.3,11.3,0,0,0,152.4,433.542H359.6A11.3,11.3,0,0,0,370.908,422.2c-.194-45.857-11.19-128.82-84.924-154.337a12.777,12.777,0,0,1-4.756-2.892h0a12.52,12.52,0,0,1,0-17.948Zm36.117,133.948c8.051,7.833.259,24.538-8.76,24.538H203.415c-9.019,0-16.811-16.7-8.76-24.538,14.318-13.932,31.782-32.065,53.326-47.161,2.359-1.654,5.147-3.56,8.019-3.3,2.872-.261,5.66,1.645,8.019,3.3C285.563,348.909,303.027,367.042,317.345,380.974ZM263.844,219.8c-27.431,5.036-58.524-18.679-67.853-32.911a10.7,10.7,0,0,1,8.569-17.124c25.643.009,77.244-.006,102.88,0a10.7,10.7,0,0,1,8.569,17.124A84.927,84.927,0,0,1,263.844,219.8Z"/></symbol>
   <symbol id="i-aviso" viewBox="0 0 24 24"><path d="M12 3.8 21.3 19.5H2.7z"/><path d="M12 9.5v4.2M12 16.7h.01"/></symbol>
   <symbol id="i-estrella" viewBox="0 0 512 512" fill="currentColor" stroke="none"><path d="M180.932,241.713a8.5,8.5,0,0,0,12.523,9.1l50.015-28.349a25.413,25.413,0,0,1,25.06,0l50.015,28.349a8.5,8.5,0,0,0,12.523-9.1c-16.077-86.518-25.526-58.264,38.654-118.968a8.5,8.5,0,0,0-4.783-14.721l-57.126-6.464a25.412,25.412,0,0,1-20.273-14.73L263.739,34.5a8.5,8.5,0,0,0-15.478,0c-37.847,79.443-13.6,62.139-101.2,73.526a8.5,8.5,0,0,0-4.783,14.721l42.416,38.807a25.411,25.411,0,0,1,7.744,23.833Z"/><path d="M68.534,404.443a21.942,21.942,0,0,1,6.686,20.578l-9.934,48.634A7.341,7.341,0,0,0,76.1,481.51l43.184-24.476a21.936,21.936,0,0,1,21.636,0L184.1,481.51a7.341,7.341,0,0,0,10.812-7.855c-13.881-74.7-22.039-50.3,33.375-102.718a7.341,7.341,0,0,0-4.13-12.71l-49.323-5.581a21.941,21.941,0,0,1-17.5-12.718l-20.55-45.184a7.34,7.34,0,0,0-13.364,0C90.74,363.336,111.679,348.4,36.041,358.227a7.341,7.341,0,0,0-4.13,12.71Z"/><path d="M409.132,339.928l-20.55-45.184a7.34,7.34,0,0,0-13.364,0c-32.677,68.592-11.739,53.651-87.377,63.483a7.341,7.341,0,0,0-4.13,12.71l36.623,33.506a21.94,21.94,0,0,1,6.686,20.578l-9.934,48.634A7.341,7.341,0,0,0,327.9,481.51l43.184-24.476a21.938,21.938,0,0,1,21.637,0L435.9,481.51a7.341,7.341,0,0,0,10.812-7.855c-13.881-74.7-22.039-50.3,33.375-102.718a7.341,7.341,0,0,0-4.13-12.71l-49.323-5.581A21.941,21.941,0,0,1,409.132,339.928Z"/></symbol>
+  <symbol id="i-exportar" viewBox="0 0 24 24"><path d="M12 3.5v11"/><path d="m7.5 10.2 4.5 4.5 4.5-4.5"/><path d="M4.7 16v2.3a2.2 2.2 0 0 0 2.2 2.2h10.2a2.2 2.2 0 0 0 2.2-2.2V16"/></symbol>
+  <symbol id="i-importar" viewBox="0 0 24 24"><path d="M12 14.5v-11"/><path d="m7.5 7.8 4.5-4.5 4.5 4.5"/><path d="M4.7 16v2.3a2.2 2.2 0 0 0 2.2 2.2h10.2a2.2 2.2 0 0 0 2.2-2.2V16"/></symbol>
   <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6.5 9.5 5.5 5.5 5.5-5.5"/></symbol>
   <symbol id="i-mochila" viewBox="0 0 512 512" fill="currentColor" stroke="none"><path d="M60.06,471.588a7,7,0,0,0,6.989-6.8c1.159-35.663,5.174-73.182,9.378-104.378a6.56,6.56,0,0,0-10.794-5.841C49.8,368.278,33.662,393.459,30.208,439.628A29.862,29.862,0,0,0,60.06,471.588Z"/><path d="M170.954,104.787h29.407a7.3,7.3,0,0,0,7.3-7.3V63.032c-.858-29.58-42.769-30.1-44-.621V97.492A7.3,7.3,0,0,0,170.954,104.787Z"/><path d="M87.486,452.211a18.4,18.4,0,0,0,18.358,19.377h22.849A13.758,13.758,0,0,0,142.322,459.6c7.045-54.081,29.893-110.608,92.039-111.211H277.64a81.516,81.516,0,0,1,73.66,46.689A219.539,219.539,0,0,1,369.678,459.6a13.758,13.758,0,0,0,13.628,11.989h22.849a18.4,18.4,0,0,0,18.359-19.377c-2.2-42.275-7.98-86.232-12.746-117.273-7.118-34.116-19.8-57.276-31.527-72.4a15.668,15.668,0,0,0-22.031-2.672c-19.879,15.565-53.2,33.28-101.9,33.28v-.031a4.088,4.088,0,0,1-.626,0v.031c-48.7,0-82.018-17.715-101.9-33.28a15.668,15.668,0,0,0-22.031,2.672c-11.73,15.121-24.41,38.281-31.527,72.4C95.466,365.979,89.686,409.936,87.486,452.211Z"/><path d="M451.94,471.588a29.862,29.862,0,0,0,29.852-31.96c-3.454-46.169-19.589-71.35-35.425-85.056a6.56,6.56,0,0,0-10.794,5.841c4.2,31.2,8.219,68.715,9.378,104.378A7,7,0,0,0,451.94,471.588Z"/><path d="M277.639,368.237H234.36c-47.223.636-63.048,42.448-70.613,82.78A17.441,17.441,0,0,0,180.9,471.588c37.6-.022,112.6.016,150.192,0a17.443,17.443,0,0,0,17.158-20.572C340.68,410.682,324.873,368.875,277.639,368.237Z"/><path d="M311.639,104.787h29.407a7.3,7.3,0,0,0,7.3-7.3V62.411c-1.229-29.476-43.14-28.959-44,.621v34.46A7.3,7.3,0,0,0,311.639,104.787Z"/><path d="M148.182,124.637a19.166,19.166,0,0,0-19.136,18.14c-1.329,24.48.965,68.115,29.584,95l-.172.092c15.291,14.159,46.668,35.433,97.229,35.433v.031a4.088,4.088,0,0,1,.626,0V273.3c50.561,0,81.938-21.274,97.229-35.433l-.172-.092c28.619-26.883,30.913-70.518,29.584-95a19.166,19.166,0,0,0-19.137-18.14h-107.5C255.825,124.629,148.75,124.642,148.182,124.637ZM276.493,230.045a15.06,15.06,0,0,1-30.12,0C247.062,210.109,275.807,210.114,276.493,230.045Z"/></symbol>
   <symbol id="i-dialogo" viewBox="0 0 512 512" fill="currentColor" stroke="none"><path d="M344.943,166.265A20.912,20.912,0,0,0,333.96,150.1l-17.673-9.378c-5.849-2.622-7.143,3.208-10.206,6.393-8.055,9.025-20.588,9.072-28.845.233-9.633-11.155-11.7-27.285-4.815-39.712,3.286-5.75,8.872-11.5,18.072-11.5,11.829,0,17.14,8.962,19.425,15.364A25.018,25.018,0,0,0,318,122.882l4.093,3.2a7.286,7.286,0,0,0,11.751-5.38c1.961-49.984-17.062-89.1-64.711-91.185H242.869c-47.674,2.089-66.656,41.2-64.713,91.184a7.287,7.287,0,0,0,11.752,5.38l4.093-3.2a25.018,25.018,0,0,0,8.081-11.382c2.285-6.4,7.6-15.364,19.425-15.364,17.516.47,24.339,19.853,21.439,34-1.083,5.5-3.376,12.069-8.182,17.214-8.258,8.839-20.791,8.792-28.845-.234-3.045-3.173-4.38-9.022-10.205-6.392L178.04,150.1c-14.628,7.533-14.753,29.31-.1,36.9a127.571,127.571,0,0,0,16.6,7.266c5.5,1.86,8.108,7.221,8.394,12.748a12.433,12.433,0,0,0,6.925,9.4,83.53,83.53,0,0,0,14.947,5.386,3.771,3.771,0,0,0,4.74-3.364q.1-1.507.253-3.083a7.089,7.089,0,0,1,14.116,1.325c-.152,1.612-.266,3.147-.347,4.622a3.737,3.737,0,0,0,3.507,3.925,146.688,146.688,0,0,0,17.829,0c4.4-.476,3.5-4.946,3.2-8.2a7.336,7.336,0,0,1,5.677-7.971c6.13-.9,8.82,3.973,8.659,9.379a3.772,3.772,0,0,0,4.741,3.364,83.543,83.543,0,0,0,14.949-5.39c4.761-2.144,7.057-7.163,7.306-12.145a12.3,12.3,0,0,1,8-10C332.189,188.726,346.363,183.645,344.943,166.265Zm-77.427,15.587c-6.1,3.261-16.931,3.263-23.032,0a9.081,9.081,0,0,1-4.349-12.1c6.313-16.028,25.425-16.023,31.732,0A9.078,9.078,0,0,1,267.516,181.852Z"/><path d="M231.659,246.032c-.608-2.329-1.085-4.655-1.457-7.015a2.236,2.236,0,0,0-1.782-1.847,111.151,111.151,0,0,1-13.579-3.508,3.336,3.336,0,0,0-4.171,4.316c7.61,21.114,24.221,51.123,51.649,45.421,21.107-4.291,32.246-27.873,39.012-45.421a3.336,3.336,0,0,0-4.172-4.316,111.333,111.333,0,0,1-13.579,3.508,2.236,2.236,0,0,0-1.782,1.847c-.372,2.36-.849,4.686-1.457,7.016-2.765,9.163-15.93,5.365-13.655-3.83a2.213,2.213,0,0,0-2.261-2.748,158.962,158.962,0,0,1-16.853,0,2.211,2.211,0,0,0-2.243,2.8C247.515,251.445,234.4,255.152,231.659,246.032Z"/><path d="M203.921,306.539c-15.93,16.321-10.065,46.13,10.747,54.931a5.72,5.72,0,0,0,7.307-8.007c-8.974-15.89-2.711-29.532,2.829-37.183a10.7,10.7,0,0,0-.98-13.671C216.7,295.845,209.323,300.479,203.921,306.539Z"/><path d="M168.943,323.777a26.231,26.231,0,0,0-7.363,5.8,15.272,15.272,0,0,1-18.164,3.6c-19.29-9.4-41.424-12.785-55.924-13.992a14.579,14.579,0,1,0-2.332,29.065c27.706,3.268,54.451,8.622,72.328,23.792,13.393,11.392,26.56,15.776,36.98,17.157a4.937,4.937,0,0,0,3.526-8.922c-19.715-14.044-21.985-39.742-21.833-52.152A4.9,4.9,0,0,0,168.943,323.777Z"/><path d="M36.515,482.484H61.48c3.237,0,5.91-3.041,6.047-6.9A446.273,446.273,0,0,1,71.285,429.9a21.664,21.664,0,0,1,8.884-15.007c9.185-6.243,11.367-15.176,11-23.1-.823-14.539-10.283-27.454-24.027-28.636-7.842-.349-11.282,2.319-14.764,5.683C34.9,386.645,30.99,458.109,29.537,473.505,29.228,478.355,32.442,482.484,36.515,482.484Z"/><path d="M249.4,348.591a8.791,8.791,0,0,0,15.377-5.3L266.5,310.6a10.527,10.527,0,0,0-6.257-10.228,10.375,10.375,0,0,0-1-.38A10.522,10.522,0,0,0,245.505,310.6l1.719,32.689A8.762,8.762,0,0,0,249.4,348.591Z"/><path d="M308.08,306.539c-5.4-6.06-12.781-10.694-19.9-3.93a10.7,10.7,0,0,0-.98,13.671c5.54,7.651,11.8,21.293,2.829,37.183a5.72,5.72,0,0,0,7.307,8.007C318.145,352.669,324.01,322.86,308.08,306.539Z"/><path d="M369.162,385.107c-29.5,28.378-76.559,26.923-94.936,25.076l-.932-27.7A17.3,17.3,0,0,0,256,365.765s-16.845,0-17.294,16.72l-.932,27.7c-18.377,1.847-65.436,3.3-94.935-25.076-4.647-4.47-11.413-5.832-16.739-2.2h0a12.641,12.641,0,0,0-2.547,18.645,98.48,98.48,0,0,0,26.292,21.279c27.087,15.074,55.006,15.108,87.017,14.435l-.5,14.87c-18.842,3.881-64.175,9.727-95.94-14.7-13.279-10.4-28.9,6.38-17.352,18.473a98.482,98.482,0,0,0,28.479,18.247,105.3,105.3,0,0,0,42.69,8.316c11.544-.124,111.977-.124,123.521,0a105.3,105.3,0,0,0,42.69-8.316,98.461,98.461,0,0,0,28.479-18.248,12.64,12.64,0,0,0-.473-18.812c-4.893-4.2-11.768-3.59-16.879.34-31.765,24.422-77.1,18.576-95.94,14.7l-.5-14.87c32.007.674,59.934.639,87.017-14.435a98.48,98.48,0,0,0,26.292-21.279,12.641,12.641,0,0,0-2.546-18.645h0C380.574,379.275,373.808,380.637,369.162,385.107Z"/><path d="M424.51,319.189c-14.5,1.207-36.635,4.592-55.925,13.992a15.272,15.272,0,0,1-18.164-3.6,26.217,26.217,0,0,0-7.363-5.8,4.9,4.9,0,0,0-7.218,4.352c.152,12.41-2.118,38.108-21.833,52.152a4.937,4.937,0,0,0,3.526,8.922c10.42-1.381,23.587-5.765,36.98-17.157,17.877-15.17,44.622-20.524,72.328-23.792a14.579,14.579,0,1,0-2.331-29.065Z"/><path d="M456.248,368.833c-3.452-3.364-6.863-6.032-14.637-5.683-13.683,1.207-22.992,14.115-23.82,28.636-.368,7.926,1.8,16.859,10.9,23.1A21.7,21.7,0,0,1,437.5,429.9a450.273,450.273,0,0,1,3.726,45.688c.136,3.86,2.786,6.9,5.994,6.9h24.75c4.039,0,7.225-4.129,6.919-8.979C477.434,458.073,473.6,386.74,456.248,368.833Z"/><path d="M477.262,279.84c-4.991-8.872-12.767-15.327-19.386-22.815-8.806-9.963-10.291-21.376-11.829-34.281-1.556-13.056-2.706-26.153-3.531-39.278-.546-8.67-13.476-8.926-13.521-.513-2.318,4.988-2.641,11.376-3.443,16.5-1.41,8.971-2.13,18.1-4.215,26.949-1.771,4.214-4.275,8.106-7.977,10.69-4.235,1.575-9.027,1.474-12.581-1.5-7.465-6.243-2.739-20.2-1.162-28.036a295.113,295.113,0,0,0,4.875-34.927c.929-11.752.5-23.672,2.175-35.351,3.022-20.312,14.036-42.272,3.84-62.185-4.988-9.173-13.113-10.277-21.765-13.791-9.284-3.772-20.439-34.936-33.491-31.531a7.753,7.753,0,0,0-6.685,2.984c-5.877,7.551,1.57,16.431,4.748,23.321,9.286,20.136,6.563,42.467,12.131,63.49,9.13,29.859,29.225,51.95,13.06,84.677-4.5,8.8-11.661,15.238-18.467,22.1-11.463,11.553-20.737,25.581-16.5,42.838,3.687,15.018,16.622,27.355,31.813,28.725,10.414.94,20.192-3.21,30.4-4.306a61.685,61.685,0,0,1,30.06,4.4c11.936,4.958,33.075,28.156,44.319,9.107C484.957,298.935,481.53,287.427,477.262,279.84Z"/><path d="M449.364,145.339c3.82-6.659,5.06-16.616-.527-22.6a7.764,7.764,0,0,0-8.113-1.713c-11.134,1.395-10.223,16.782-5.884,24.311C437.831,151.15,446.269,150.732,449.364,145.339Z"/><path d="M31.868,307.109C43.112,326.158,64.251,302.96,76.187,298a61.685,61.685,0,0,1,30.06-4.4c10.211,1.1,19.989,5.246,30.4,4.306,15.191-1.37,28.126-13.707,31.813-28.725,4.236-17.257-5.038-31.285-16.5-42.838-6.806-6.86-13.966-13.3-18.467-22.1-16.165-32.727,3.93-54.818,13.06-84.677,5.568-21.023,2.845-43.354,12.131-63.49,3.178-6.89,10.625-15.77,4.748-23.321a7.753,7.753,0,0,0-6.685-2.984c-13.052-3.405-24.207,27.759-33.491,31.531-8.652,3.514-16.777,4.618-21.765,13.791-10.2,19.913.818,41.873,3.84,62.185,1.673,11.679,1.246,23.6,2.175,35.351a295.113,295.113,0,0,0,4.875,34.927c1.577,7.838,6.3,21.793-1.162,28.036-3.554,2.972-8.346,3.073-12.581,1.5-3.7-2.584-6.206-6.476-7.977-10.69-2.085-8.85-2.8-17.978-4.215-26.949-.8-5.127-1.125-11.515-3.443-16.5-.044-8.413-12.975-8.157-13.521.513-.825,13.125-1.975,26.222-3.531,39.278-1.538,12.905-3.023,24.318-11.829,34.281-6.619,7.488-14.394,13.943-19.386,22.815C30.47,287.427,27.043,298.935,31.868,307.109Z"/><path d="M71.276,121.027a7.764,7.764,0,0,0-8.113,1.713c-5.587,5.983-4.347,15.94-.527,22.6,3.095,5.393,11.534,5.811,14.524,0C81.5,137.809,82.41,122.422,71.276,121.027Z"/></symbol>
@@ -701,8 +705,13 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
 <footer>
   <div class="ax-save">
     <span id="guardadoTxt"><svg class="ax-ico" aria-hidden="true"><use href="#i-guardado"/></svg>Guardado automático.</span>
-    <button class="ax-btn-link" id="borrarGuardado" style="color:var(--ax-text-subtle)"><svg class="ax-ico" aria-hidden="true"><use href="#i-papelera"/></svg>Empezar de cero</button>
+    <span class="ax-save__acc">
+      <button class="ax-btn-link" id="exportar"><svg class="ax-ico" aria-hidden="true"><use href="#i-exportar"/></svg>Exportar</button>
+      <button class="ax-btn-link" id="importar"><svg class="ax-ico" aria-hidden="true"><use href="#i-importar"/></svg>Importar</button>
+      <button class="ax-btn-link" id="borrarGuardado" style="color:var(--ax-text-subtle)"><svg class="ax-ico" aria-hidden="true"><use href="#i-papelera"/></svg>Empezar de cero</button>
+    </span>
   </div>
+  <input type="file" id="ficheroJson" accept="application/json,.json" hidden>
   Se guarda en este navegador y sobrevive a recargas. Verifica el desglose: la app puede equivocarse, tu DM manda.
   <details class="ax-legal"><summary>Créditos y licencia</summary>
     <p>Interfaz basada en el sistema de diseño Vireo (Aurora). Contiene material del System Reference Document 5.1 de Wizards of the Coast LLC, bajo licencia Creative Commons Attribution 4.0. Contenido homebrew y no-SRD introducido manualmente para uso personal.</p>
@@ -761,6 +770,18 @@ footer{margin-top:var(--ax-space-8);padding-top:var(--ax-space-4);border-top:1px
     <p>Pulsa el nombre para usarlo. La flecha abre la descripción.</p>
     <div class="ax-weapons" id="listaLanzar" style="margin-top:16px"></div>
     <button class="ax-sheet__x" data-lanzar="x"><svg class="ax-ico ax-ico--sm" aria-hidden="true"><use href="#i-equis"/></svg> Cancelar</button>
+  </div>
+</div>
+
+<div class="ax-overlay" id="impPad" hidden>
+  <div class="ax-sheet">
+    <h3>¿Importar este guardado?</h3>
+    <p id="impTxt"></p>
+    <div class="ax-choice">
+      <button data-imp="1" data-yes><svg class="ax-ico" aria-hidden="true"><use href="#i-importar"/></svg>Sí, importar<small>reemplaza lo actual</small></button>
+      <button data-imp="0" data-no><svg class="ax-ico" aria-hidden="true"><use href="#i-equis"/></svg>Cancelar<small>no toca nada</small></button>
+    </div>
+    <p class="ax-sheet__foot">Sustituye todo lo que tengas ahora: vida, usos, turno y registro. Exporta antes si quieres conservarlo.</p>
   </div>
 </div>
 
@@ -1649,13 +1670,11 @@ function guardar(){                      // agrupa ráfagas de cambios en una es
   clearTimeout(pendiente);
   pendiente = setTimeout(guardarYa, 300);
 }
-function guardarYa(){
-  if(!almacen || inhabilitado) return;
-  clearTimeout(pendiente);
+// lo que se guarda y lo que se exporta son el mismo objeto: una sola fuente
+function construirPaquete(){
   podarLog();
-  const ts = Date.now();
-  const paquete = {
-    v:1, ts,
+  return {
+    v:1, ts:Date.now(),
     s:{
       arma:S.arma, pg:S.pg, turnoNum:S.turnoNum,
       usos:S.usos, acciones:S.acciones, slots:S.slots, abiertos:S.abiertos,
@@ -1664,6 +1683,13 @@ function guardarYa(){
     },
     log: $("#log").innerHTML
   };
+}
+
+function guardarYa(){
+  if(!almacen || inhabilitado) return;
+  clearTimeout(pendiente);
+  const paquete = construirPaquete();
+  const ts = paquete.ts;
   try{
     almacen.setItem(CLAVE, JSON.stringify(paquete));
     marcarGuardado(`Guardado ${hora(ts)}`);
@@ -1709,7 +1735,7 @@ function restaurar(){
   }
 
   if(Array.isArray(s.acciones)) S.acciones = s.acciones;          // turno a medias
-  if(s.slots) [1,2].forEach(n=>{ if(typeof s.slots[n] === "string") S.slots[n] = s.slots[n]; });
+  if(s.slots) [1,2,3].forEach(n=>{ if(typeof s.slots[n] === "string") S.slots[n] = s.slots[n]; });
   if(typeof g.log === "string" && g.log) $("#log").innerHTML = g.log;
 
   const mismoDia = new Date(g.ts).toDateString() === new Date().toDateString();
@@ -1718,6 +1744,89 @@ function restaurar(){
 
 function sincronizarInterruptores(){
   Object.entries(INTERRUPTORES).forEach(([sel,k])=> $(sel).setAttribute("aria-pressed", S[k]));
+}
+
+/* ═══════════════════════════════════════════
+   Exportar e importar en JSON
+   Copia antes de sesión y puente entre el móvil y el PC: cada navegador
+   tiene su propio localStorage y no se hablan entre ellos.
+   ═══════════════════════════════════════════ */
+const esc = txt => String(txt).replace(/[&<>"]/g, c =>
+  ({"&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;"}[c]));
+
+function paqueteValido(g){
+  return !!g && g.v === 1 && !!g.s && typeof g.s === "object" && !Array.isArray(g.s);
+}
+
+function exportar(){
+  const p = construirPaquete();
+  p.app = "Edgar · asistente de combate";
+  p.exportado = new Date(p.ts).toISOString();
+  p.pj = {nombre:"EDGAR — Clero de Shaviri", pgMax:PJ.pgMax, nivelBarbaro:PJ.nivelBarbaro};
+  const texto = JSON.stringify(p, null, 2);
+  const f = new Date(p.ts), dd = n => String(n).padStart(2, "0");
+  const sello = `${f.getFullYear()}-${dd(f.getMonth()+1)}-${dd(f.getDate())}-${dd(f.getHours())}${dd(f.getMinutes())}`;
+  const url = URL.createObjectURL(new Blob([texto], {type:"application/json"}));
+  const a = document.createElement("a");
+  a.href = url; a.download = `edgar-${sello}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=> URL.revokeObjectURL(url), 4000);
+  log(`Datos exportados: edgar-${sello}.json (${(texto.length/1024).toFixed(1)} KB).`);
+}
+
+function leerFichero(fichero){
+  return new Promise((resolver, fallar)=>{
+    const lector = new FileReader();
+    lector.onload  = ()=> resolver(lector.result);
+    lector.onerror = ()=> fallar(lector.error);
+    lector.readAsText(fichero);
+  });
+}
+
+function confirmarImportar(g, nombre){
+  const s = g.s;
+  const fecha = Number.isFinite(g.ts) ? new Date(g.ts).toLocaleString("es-ES") : "sin fecha";
+  const quien = g.pj && g.pj.nombre ? ` · ${esc(g.pj.nombre)}` : "";
+  const otroPJ = g.pj && Number.isFinite(g.pj.pgMax) && g.pj.pgMax !== PJ.pgMax
+    ? `<br><span style="color:var(--ax-warning-500)">Ojo: ese guardado es de un personaje con ${g.pj.pgMax} PG máximos, no ${PJ.pgMax}.</span>`
+    : "";
+  $("#impTxt").innerHTML = `<strong>${esc(nombre)}</strong><br>Guardado del ${esc(fecha)}${quien}.
+    <br>Vida ${Number.isFinite(s.pg) ? s.pg : "?"} · turno ${Number.isFinite(s.turnoNum) ? s.turnoNum : "?"}${otroPJ}`;
+  return hoja("#impPad", "imp");
+}
+
+async function importar(fichero){
+  let g;
+  try{
+    g = JSON.parse(await leerFichero(fichero));
+  }catch(e){
+    marcarGuardado("Ese archivo no es JSON válido.", true, true);
+    return;
+  }
+  if(!paqueteValido(g)){
+    marcarGuardado("Ese JSON no es un guardado de Edgar.", true, true);
+    return;
+  }
+  if(!await confirmarImportar(g, fichero.name)) return;
+  if(!almacen){
+    marcarGuardado("Sin almacenamiento: no puedo importar.", true, true);
+    return;
+  }
+  inhabilitado = true;                // si no, el volcado de pagehide pisa lo importado
+  clearTimeout(pendiente);
+  try{
+    almacen.setItem(CLAVE, JSON.stringify({
+      v:1,
+      ts: Number.isFinite(g.ts) ? g.ts : Date.now(),
+      s: g.s,
+      log: typeof g.log === "string" ? g.log : ""
+    }));
+  }catch(e){
+    inhabilitado = false;
+    marcarGuardado("No cabe en el almacenamiento del navegador.", true, true);
+    return;
+  }
+  location.reload();                  // al recargar, restaurar() valida y acota todo
 }
 
 function borrarGuardado(){
@@ -1758,6 +1867,13 @@ $("#btnFin").onclick    = finalizarTurno;
 $("#btnLanzar").onclick = lanzar;
 $("#limpiar").onclick   = ()=>{ $("#log").innerHTML = ""; guardar(); };
 $("#borrarGuardado").onclick = async ()=>{ if(await hoja("#resetPad","reset")) borrarGuardado(); };
+$("#exportar").onclick = exportar;
+$("#importar").onclick = ()=> $("#ficheroJson").click();
+$("#ficheroJson").onchange = async e => {
+  const f = e.target.files[0];
+  e.target.value = "";              // así se puede reimportar el mismo archivo
+  if(f) await importar(f);
+};
 $("#descansoLargo").onclick = ()=>{
   PJ.recursos.forEach(r=> S.usos[r.id] = r.max);
   S.pg = PJ.pgMax; S.furia = false;
